@@ -1,0 +1,10 @@
+{
+  "profile": "sre",
+  "allowedServers": ["filesystem", "git"],
+  "permissions": {
+    "readOnly": true,
+    "allowedPaths": ["./docs/operations", "./logs"],
+    "canExecuteCommands": true,
+    "allowedCommands": ["tail", "grep", "node bin/engineering-os.js status"]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "profile": "release",
+  "allowedServers": ["filesystem", "git", "database"],
+  "permissions": {
+    "readOnly": false,
+    "allowedPaths": ["./infra", "./.github/workflows", "./scripts"],
+    "canExecuteCommands": true,
+    "allowedCommands": ["bash scripts/migrate.sh", "bash scripts/smoke-test.sh", "bash scripts/rollback.sh"]
+  }
+}

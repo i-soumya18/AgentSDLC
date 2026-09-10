@@ -104,10 +104,15 @@ export async function runEval(args) {
   console.log(`  Estimated Cost: $${totalCostEstimate.toFixed(5)} USD`);
   console.log('='.repeat(60));
 
-  if (overallSuccess) {
+    if (overallSuccess) {
     console.log(`\x1b[32m\x1b[1m✓ AI EVALUATION GATE PASSED!\x1b[0m`);
   } else {
     console.log(`\x1b[31m\x1b[1m✗ AI EVALUATION GATE FAILED: Pass rate ${(passRate * 100).toFixed(1)}% below required threshold ${(threshold * 100).toFixed(1)}%\x1b[0m`);
     process.exitCode = 1;
   }
 }
+
+if (process.argv[1] && process.argv[1].endsWith('eval-runner.js')) {
+  runEval(process.argv.slice(2));
+}
+

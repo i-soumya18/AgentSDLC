@@ -1,0 +1,10 @@
+{
+  "profile": "tester",
+  "allowedServers": ["filesystem", "browser", "database"],
+  "permissions": {
+    "readOnly": false,
+    "allowedPaths": ["./tests", "./specs"],
+    "canExecuteCommands": true,
+    "allowedCommands": ["npm test", "npm run test:eval", "npx playwright test"]
+  }
+}

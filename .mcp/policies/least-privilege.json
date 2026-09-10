@@ -1,0 +1,24 @@
+{
+  "policyName": "least-privilege-enforcement",
+  "version": "1.0",
+  "rules": [
+    {
+      "scope": "production_database",
+      "action": ["DROP", "TRUNCATE", "ALTER"],
+      "allowedAgents": [],
+      "humanAuthorizationRequired": true
+    },
+    {
+      "scope": "production_deployment",
+      "action": ["deploy", "traffic_shift"],
+      "allowedAgents": ["release"],
+      "humanAuthorizationRequired": true
+    },
+    {
+      "scope": "secrets_management",
+      "action": ["read", "rotate", "export"],
+      "allowedAgents": [],
+      "humanAuthorizationRequired": true
+    }
+  ]
+}

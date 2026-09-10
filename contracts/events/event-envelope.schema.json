@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CloudEvents Envelope Schema",
+  "type": "object",
+  "required": [
+    "specversion",
+    "id",
+    "source",
+    "type",
+    "time",
+    "data"
+  ],
+  "properties": {
+    "specversion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique event identifier"
+    },
+    "source": {
+      "type": "string",
+      "format": "uri-reference",
+      "description": "Origin of the event producer"
+    },
+    "type": {
+      "type": "string",
+      "description": "Hierarchical event name, e.g. com.engineeringos.task.created"
+    },
+    "time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "datacontenttype": {
+      "type": "string",
+      "default": "application/json"
+    },
+    "data": {
+      "type": "object"
+    }
+  }
+}

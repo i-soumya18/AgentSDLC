@@ -1,0 +1,9 @@
+{
+  "profile": "researcher",
+  "allowedServers": ["filesystem", "git"],
+  "permissions": {
+    "readOnly": true,
+    "allowedPaths": ["./specs", "./docs", "./contracts", "./.ai"],
+    "canExecuteCommands": false
+  }
+}

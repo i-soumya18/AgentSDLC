@@ -1,0 +1,172 @@
+openapi: 3.1.0
+info:
+  title: Agentic SDLC OS Standard API
+  version: 1.0.0
+  description: Official OpenAPI 3.1 contract specification for Engineering OS services.
+
+paths:
+  /healthz:
+    get:
+      summary: Liveness health check
+      operationId: getHealth
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  /api/v1/tasks:
+    get:
+      summary: List tasks
+      operationId: listTasks
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Paginated tasks list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTasks'
+    post:
+      summary: Create a new task
+      operationId: createTask
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaskRequest'
+      responses:
+        '201':
+          description: Task created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Bad request validation failure
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    Task:
+      type: object
+      required:
+        - id
+        - title
+        - status
+        - createdAt
+      properties:
+        id:
+          type: string
+          example: task_01j7x8a
+        title:
+          type: string
+          minLength: 1
+          maxLength: 255
+          example: Build user auth slice
+        description:
+          type: string
+          example: Implement authentication endpoint
+        status:
+          type: string
+          enum: [todo, in_progress, done]
+          example: todo
+        tags:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CreateTaskRequest:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 255
+          example: Implement task controller
+        description:
+          type: string
+          example: Vertical slice task
+        tags:
+          type: array
+          items:
+            type: string
+
+    PaginatedTasks:
+      type: object
+      required:
+        - items
+        - nextCursor
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        nextCursor:
+          type: string
+          nullable: true
+
+    ErrorResponse:
+      type: object
+      required:
+        - type
+        - title
+        - status
+        - detail
+      properties:
+        type:
+          type: string
+          example: https://api.example.com/errors/validation-error
+        title:
+          type: string
+          example: Invalid Request Parameters
+        status:
+          type: integer
+          example: 400
+        detail:
+          type: string
+          example: The 'title' field must not be blank.
+        instance:
+          type: string
+          example: /api/v1/tasks
+        requestId:
+          type: string
+          example: req_01j7x8a92m

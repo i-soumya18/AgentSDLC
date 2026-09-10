@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cursor-Based Pagination Envelope Schema",
+  "type": "object",
+  "required": [
+    "items",
+    "nextCursor"
+  ],
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "nextCursor": {
+      "type": ["string", "null"]
+    },
+    "hasMore": {
+      "type": "boolean"
+    },
+    "totalCount": {
+      "type": "integer",
+      "minimum": 0
+    }
+  }
+}

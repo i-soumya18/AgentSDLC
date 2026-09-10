@@ -1,0 +1,10 @@
+{
+  "profile": "builder",
+  "allowedServers": ["filesystem", "git", "database"],
+  "permissions": {
+    "readOnly": false,
+    "allowedPaths": ["./src", "./tests", "./specs"],
+    "canExecuteCommands": true,
+    "allowedCommands": ["npm test", "npm run lint", "node bin/engineering-os.js gate"]
+  }
+}

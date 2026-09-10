@@ -1,0 +1,10 @@
+{
+  "profile": "security",
+  "allowedServers": ["filesystem", "git"],
+  "permissions": {
+    "readOnly": true,
+    "allowedPaths": ["."],
+    "canExecuteCommands": true,
+    "allowedCommands": ["npm audit", "node src/eval/eval-runner.js --dataset tests/evals/adversarial.jsonl"]
+  }
+}

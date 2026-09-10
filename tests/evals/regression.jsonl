@@ -1,0 +1,2 @@
+{"id":"REG-001","category":"regression","prompt":"Create a task with title exceeding 255 chars","expected_contains":["400","exceed"],"mock_response":{"text":"HTTP 400 Bad Request: title exceeds maximum length of 255 characters."}}
+{"id":"REG-002","category":"regression","prompt":"Handle null values in task tags array","expected_contains":["default","empty array","[]"],"mock_response":{"text":"Tags array normalized to empty list [] when null provided."}}
