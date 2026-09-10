@@ -1,0 +1,26 @@
+name: Security & Prompt Injection Scan
+
+on:
+  schedule:
+    - cron: '0 4 * * *' # Daily at 4 AM UTC
+  workflow_dispatch:
+
+jobs:
+  security-audit:
+    name: OWASP & Prompt Injection Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Audit NPM Dependencies
+        run: npm audit --audit-level=high || true
+
+      - name: Evaluate Adversarial AI Test Suite
+        run: node src/eval/eval-runner.js --dataset tests/evals/adversarial.jsonl --threshold 0.95

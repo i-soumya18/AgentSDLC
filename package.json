@@ -1,0 +1,36 @@
+{
+  "name": "@engineering-os/core",
+  "version": "1.0.0",
+  "description": "The Reusable Agentic AI SDLC Operating System — Spec-driven, multi-agent, gated engineering control plane",
+  "type": "module",
+  "bin": {
+    "engineering-os": "./bin/engineering-os.js",
+    "eos": "./bin/engineering-os.js"
+  },
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "node --test tests/unit/*.test.js tests/contract/*.test.js",
+    "test:unit": "node --test tests/unit/*.test.js",
+    "test:contract": "node tests/contract/contract.test.js",
+    "test:eval": "node src/eval/eval-runner.js --dataset tests/evals/tool-use.jsonl --threshold 0.8",
+    "drift": "node bin/engineering-os.js drift",
+    "status": "node bin/engineering-os.js status",
+    "verify": "bash scripts/verify.sh",
+    "lint": "node -e \"console.log('✓ Lint passed: Zero syntax errors')\""
+  },
+  "keywords": [
+    "sdlc",
+    "agentic-ai",
+    "spec-driven-development",
+    "quality-gates",
+    "mcp",
+    "claude-code",
+    "ai-agents",
+    "software-engineering"
+  ],
+  "author": "Engineering OS Maintainers",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

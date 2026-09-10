@@ -1,0 +1,17 @@
+# Global fallback
+* @tech-lead
+
+# Constitution, Governance, and Quality Gates (Human Gate Required)
+.ai/constitution.md @architecture-council @security-lead
+.ai/quality-gates.md @architecture-council
+.ai/tool-policy.md @security-lead
+
+# Architecture & Contracts
+docs/adr/ @architecture-council
+contracts/ @api-lead @architecture-council
+
+# Infrastructure & Production Deployments
+infra/ @devops-lead
+scripts/migrate.sh @dba-lead
+scripts/rollback.sh @devops-lead
+.github/workflows/ @devops-lead

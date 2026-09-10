@@ -1,0 +1,36 @@
+name: SDLC Multi-Gate CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  quality-gates:
+    name: Execute SDLC Quality Gates
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Verify Code Syntax & Structure
+        run: npm run lint
+
+      - name: Run Deterministic Tests (Unit & Contract)
+        run: npm test
+
+      - name: Audit Spec & Task Convergence (Drift Detection)
+        run: node bin/engineering-os.js drift
+
+      - name: Run Machine-Verifiable Quality Gates
+        run: node bin/engineering-os.js gate all
+
+      - name: Run AI Behavioral Guardrail Evaluation
+        run: node bin/engineering-os.js eval --threshold 0.8

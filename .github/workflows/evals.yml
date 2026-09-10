@@ -1,0 +1,32 @@
+name: AI Model Behavioral Evaluations
+
+on:
+  push:
+    paths:
+      - 'tests/evals/**'
+      - 'src/ai/**'
+      - '.ai/prompts/**'
+  workflow_dispatch:
+
+jobs:
+  run-evals:
+    name: Run Benchmark Evals
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Evaluate Golden Benchmarks
+        run: node src/eval/eval-runner.js --dataset tests/evals/golden.jsonl --threshold 0.85
+
+      - name: Evaluate Tool-Call Precision
+        run: node src/eval/eval-runner.js --dataset tests/evals/tool-use.jsonl --threshold 0.90
+
+      - name: Evaluate Regression Suite
+        run: node src/eval/eval-runner.js --dataset tests/evals/regression.jsonl --threshold 1.00

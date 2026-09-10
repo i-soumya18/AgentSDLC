@@ -1,0 +1,32 @@
+name: Production Release Pipeline
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release-gate:
+    name: Verify Release Readiness & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Verify All Quality Gates
+        run: node bin/engineering-os.js gate release
+
+      - name: Pre-Deployment Migration Check
+        run: bash scripts/migrate.sh --dry-run
+
+      - name: Deploy Staging & Run Smoke Tests
+        run: bash scripts/smoke-test.sh --env staging
+
+      - name: Verify Automated Rollback Capability
+        run: bash scripts/rollback.sh --verify-only
