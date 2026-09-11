@@ -14,6 +14,8 @@
 *Built on Spec-Driven Development (SDD), bounded-autonomy agent collaboration, contract-first OpenAPI schemas, reusable engineering skills, dual-track testing, and 15 machine-verifiable quality gates.*
 
 [Why Use It](#-why-use-it-the-problem--solution) •
+[SSOT & Single Entry Point](#-single-source-of-truth--single-entry-point-agentsmd--claudemd) •
+[Simple User Story](#-a-simple-user-story-from-raw-idea-to-verified-production-in-15-minutes) •
 [Quickstart](#-quickstart--how-to-use-it) •
 [CLI Commands](#-complete-cli-reference) •
 [15-Stage SDLC](#-the-15-stage-sdlc-pipeline) •
@@ -84,6 +86,127 @@ Unit, Integ.   OpenAPI & RFC7807   OWASP API & GenAI   Golden, Adversarial,
 | **Security & Safety** | Vulnerable to prompt injection, excessive agency, and secret leaks. | **BeyondCorp Model**: Least-privilege MCP profiles, system prompt delimiters, OWASP Top 10 gates. |
 | **Quality Verification** | Human manually reviews thousands of lines of code ("looks good to me"). | **15 Machine Gates**: Automated scripts produce verifiable machine proof before code merges. |
 | **Knowledge Retention** | Bugs recur because the AI forgets past incidents. | **Self-Improving Flywheel**: Postmortems convert bugs into permanent regression benchmarks & skills. |
+
+---
+
+## 🧭 Single Source of Truth & Single Entry Point: `AGENTS.md` & `CLAUDE.md`
+
+One of the biggest failure modes in AI-assisted development is **context fragmentation**—scattered verbal instructions across prompts, outdated documentation, or forgotten architectural constraints. 
+
+`engineering-os` eliminates this by establishing a **dual-anchor system**:
+
+```text
+               THE SINGLE SOURCE OF TRUTH & SINGLE ENTRY POINT
+               
+     HUMAN ARCHITECT / ENGINEER
+                 │
+                 ▼
+  ┌───────────────────────────────┐
+  │           AGENTS.md           │  ◄── SINGLE SOURCE OF TRUTH (SSOT)
+  │   The Universal Project       │      • Project Manifest (Identity, Stack, Goals)
+  │   Governance Manifest         │      • 8-Step Repository Propagation Protocol
+  │                               │      • 12 Inviolable Engineering Principles
+  └──────────────┬────────────────┘
+                 │ Read by All Autonomous Agents (Claude Code, Antigravity, Copilot, Cursor)
+                 ▼
+  ┌───────────────────────────────┐
+  │           CLAUDE.md           │  ◄── SINGLE ENTRY POINT (Operational Cockpit)
+  │    Session Ignition Key       │      • Read automatically at session start
+  │    & Autonomous Controller    │      • Quick-fill project anchor configuration
+  │                               │      • Maps /slash-commands to stage playbooks
+  └──────────────┬────────────────┘
+                 │
+                 ▼
+      AUTONOMOUS REPOSITORY PROPAGATION
+      ├── Calibrates .ai/constitution.md and .ai/context.md
+      ├── Scaffolds specs/ with REQ-xxx and clarification attacks
+      ├── Updates docs/architecture/ (C4 diagrams & 14 failure modes)
+      ├── Generates contracts/openapi.yaml & RFC 7807 error schemas
+      ├── Implements vertical slice tasks (UI → API → DB → AI Tool)
+      └── Runs bash scripts/verify.sh until 15 Quality Gates are 100% Green
+```
+
+### 1. `AGENTS.md` — The Single Source of Truth (SSOT) & Permanent Governance Contract
+- **Universal Cross-Agent Standard**: A tool-agnostic engineering master contract binding any AI agent (Claude Code, Antigravity, GitHub Copilot, Cursor, Codex).
+- **The Universal Project Manifest (`PART 1`)**: A structured YAML manifest declaring the project's identity, target personas, business outcomes, SLO targets (P95 latency, error budgets), explicit non-goals, architecture stack, and milestone deliverables. You configure your project **once** in `AGENTS.md`; everything else in the codebase flows deterministically from it.
+- **The Repository Propagation Protocol (`PART 2`)**: An 8-step deterministic algorithm directing any AI agent how to adapt the entire repository (`.ai/context.md`, `specs/`, C4 diagrams, ADRs, OpenAPI contracts, tasks, implementation code, tests, and evals) to match the manifest.
+- **The Permanent Instruction Hierarchy & 12 Non-Negotiable Principles**: Sets the highest layer of precedence in the repo and enforces Google Senior Engineering standards (specification before implementation, small reversible vertical slices, zero-downtime expand-contract migrations, and beyondcorp security).
+
+### 2. `CLAUDE.md` — The Single Entry Point & Operational Cockpit
+- **Instant Session Ignition**: Automatically read by Claude Code and Antigravity IDE at the very start of every session. It serves as the front door and operational steering wheel.
+- **Immediate Context Grounding (`project_quick_config`)**: Directly anchors the AI's runtime focus: active milestone, current feature directory (`specs/<feature>`), tech stack, governance mode (`strict` / `standard` / `minimal`), and eval threshold.
+- **Slash Commands & Stage Playbooks**: Maps 16 conversational slash commands (`/assess`, `/specify`, `/clarify`, `/design`, `/architect`, `/contract`, `/plan`, `/tasks`, `/implement`, `/verify`, `/review`, `/security`, `/eval`, `/converge`, `/release`, `/observe`) directly to prompt playbooks in `.ai/prompts/` and CLI tools in `bin/engineering-os.js`.
+- **Enforces Manifest Compliance**: Instructs the agent to read `AGENTS.md` before executing any task, eliminating hallucinated workflows, unauthorized tool executions, or unverified claims of completion.
+
+---
+
+## 📖 A Simple User Story: From Raw Idea to Verified Production in 15 Minutes
+
+Here is a practical user story showing how a developer and an autonomous AI agent collaborate using `AGENTS.md` and `CLAUDE.md`:
+
+### The User Story
+> **As a** Lead Software Architect or Fullstack Engineer,  
+> **I want to** build a new feature ("Patient Appointment Booking" / `002-patient-booking`),  
+> **So that** my autonomous AI agent produces fully specified, secure, contract-tested, and drift-free code without architectural shortcuts or manual hand-holding.
+
+---
+
+### The 15-Minute Execution Flow
+
+```text
+[Human Updates AGENTS.md] ──► [Agent Reads CLAUDE.md] ──► [/specify REQ-xxx] ──► [/clarify Critic]
+                                                                                       │
+┌──────────────────────────────────────────────────────────────────────────────────────┘
+▼
+[OpenAPI 3.1 Contract] ──► [Vertical Task Slice] ──► [Builder Implements] ──► [bash scripts/verify.sh]
+                                                                                       │
+                                                        ✨ 15 Quality Gates Pass & Zero Drift ✨
+```
+
+#### Step 1: Human Updates the Single Source of Truth (`AGENTS.md`)
+The architect defines the feature requirement in the `project_manifest` of `AGENTS.md`:
+```yaml
+# In AGENTS.md -> project_manifest
+deliverables_and_milestones:
+  - milestone_id: "M2"
+    name: "Patient Appointment Booking"
+    deliverables:
+      - "Feature 002: Patient booking slice (UI + REST API + SQLite + AI Conflict Resolver)"
+```
+
+#### Step 2: Agent Boots into the Single Entry Point (`CLAUDE.md`)
+The developer opens Claude Code or Antigravity IDE. The agent automatically reads `CLAUDE.md`, anchors to `M2`, and inspects `AGENTS.md` as its constitutional authority.
+
+#### Step 3: Specifying Requirements & Attacking Ambiguities
+The developer types:
+```text
+/specify 002-patient-booking: Patients can book 30-min doctor slots with AI double-booking conflict resolution.
+```
+- The agent scaffolds `specs/002-patient-booking/spec.md` with explicit, testable criteria (`REQ-001: Slot Booking`, `REQ-002: Conflict Detection`).
+- It shifts to the **Requirements Critic** role (`/clarify`) to attack the spec in `clarification.md`: *What happens if two patients submit the same slot at the exact same millisecond? What timezone handles daylight savings?*
+- The **UX Architect** documents the 8-state UI interaction contract in `ux.md` (Loading skeleton, Empty state, Success confirmation, Error banner, Retry state).
+
+#### Step 4: Contract-First API & Architecture
+The agent adopts the **API & Data Agent** persona:
+- Generates `/api/v1/appointments` (`POST`, `GET`) in `contracts/openapi.yaml`.
+- Binds error schemas to RFC 7807 problem details in `contracts/schemas/error-response.schema.json`.
+- Authors `docs/adr/0005-appointment-locking.md` choosing optimistic locking with SQLite version columns.
+
+#### Step 5: Vertical Slice Breakdown & Implementation
+The agent adopts the **Technical Planner** & **Builder Agent** personas:
+- Breaks down `tasks.md` (`TASK-001.1` Schema → `TASK-001.2` API Route → `TASK-001.3` UI Component → `TASK-001.4` Unit & Contract Tests).
+- Implements the vertical slice in `src/` following vertical slice isolation (`UI → API → DB → AI Tool → Test → Telemetry`).
+- Populates golden and adversarial benchmarks in `tests/evals/` (`tool-use.jsonl` and `adversarial.jsonl`).
+
+#### Step 6: Machine-Verifiable Verification & Zero Drift
+The agent executes verification:
+```bash
+node bin/engineering-os.js drift 002-patient-booking
+bash scripts/verify.sh
+```
+- `eos drift` confirms **Zero Drift**: 100% of requirements map to tasks, and 100% of tasks are verified in code.
+- All 15 Quality Gates pass with verifiable terminal evidence.
+- The pull request is opened using `.github/pull_request_template.md` with zero unresolved drift and zero hallucinations.
 
 ---
 
