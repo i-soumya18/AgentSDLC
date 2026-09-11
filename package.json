@@ -30,6 +30,26 @@
   ],
   "author": "Engineering OS Maintainers",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i-soumya18/AgentSDLC.git"
+  },
+  "bugs": {
+    "url": "https://github.com/i-soumya18/AgentSDLC/issues"
+  },
+  "homepage": "https://github.com/i-soumya18/AgentSDLC#readme",
+  "files": [
+    "bin",
+    "src",
+    "skills",
+    ".ai",
+    "contracts",
+    "docs",
+    "specs",
+    "scripts",
+    "CLAUDE.md",
+    "AGENTS.md"
+  ],
   "engines": {
     "node": ">=20.0.0"
   }
