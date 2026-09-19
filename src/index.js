@@ -22,7 +22,8 @@ export {
   validateArtifactMetadata,
   validateDecision,
   validateAssumption,
-  validateEvidence
+  validateEvidence,
+  validateContextPack
 } from './artifacts/validator.js';
 
 // Product Discovery Engine (Phase 1)
@@ -46,6 +47,31 @@ export {
   RELATIONSHIPS
 } from './graph/product-knowledge-graph.js';
 
+// Agent Context Compiler (Phase 4)
+export {
+  AgentContextCompiler,
+  compileContext
+} from './context/context-compiler.js';
+export {
+  ROLES,
+  HIERARCHY_LEVELS,
+  resolveRole
+} from './context/role-profiles.js';
+export {
+  evaluateFileExclusion,
+  filterCandidates,
+  FILTER_REASONS
+} from './context/filter-rules.js';
+export {
+  computeContextMetrics,
+  estimateTokens
+} from './context/metrics.js';
+export {
+  formatJson,
+  formatMarkdown,
+  formatPrompt
+} from './context/formatter.js';
+
 // Verification & Eval Harness
 export { executeVerification } from './verification/verify-runner.js';
 export { runEval } from './eval/eval-runner.js';
@@ -57,6 +83,7 @@ export { runClarify } from './cli/clarify.js';
 export { runContract } from './cli/contract.js';
 export { runApprove, runReject } from './cli/approve.js';
 export { runGraph } from './cli/graph.js';
+export { runContext } from './cli/context.js';
 export { runInit } from './cli/init.js';
 export { runStage } from './cli/stage.js';
 export { runGate } from './cli/gate.js';

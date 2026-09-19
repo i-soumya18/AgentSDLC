@@ -89,6 +89,16 @@ project_manifest:
         - "Dual-track AI evaluation datasets (golden, adversarial, regression, tool-use)"
         - "Automated rollback verification and synthetic smoke tests"
         - "Zero drift detected between spec, tasks, contracts, and implementation"
+    - milestone_id: "M4"
+      name: "Agent Context Compiler & Minimum Sufficient Context"
+      status: "COMPLETED"
+      deliverables:
+        - "6-level context hierarchy (L0 to L5) and canonical role profiles for 14 agents"
+        - "Deterministic graph-driven context compilation pipeline with negative noise filters"
+        - "Canonical context pack JSON schema (schemas/context-pack.schema.json) and validation"
+        - "Context efficiency metrics (token estimation, compression ratio, relevance density)"
+        - "100% explainability: every included item has an explicit reason"
+        - "CLI command 'eos context' with multi-format rendering (JSON, Markdown, System Prompt)"
 ```
 
 ---

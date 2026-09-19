@@ -13,6 +13,7 @@ import { runClarify } from '../src/cli/clarify.js';
 import { runContract } from '../src/cli/contract.js';
 import { runApprove, runReject } from '../src/cli/approve.js';
 import { runGraph } from '../src/cli/graph.js';
+import { runContext } from '../src/cli/context.js';
 import { STAGES } from '../src/lifecycle/stages.js';
 
 const HELP_TEXT = `
@@ -31,6 +32,7 @@ const HELP_TEXT = `
   \x1b[32mapprove [--by <name>]\x1b[0m         Mutually approve product contract and cryptographically lock scope
   \x1b[32mreject [--reason <reason>]\x1b[0m    Record rejection of current product contract
   \x1b[32mgraph [lineage|impact|check]\x1b[0m  Generate and query product knowledge graph and traceability matrix
+  \x1b[32mcontext [--task|role|explain]\x1b[0m Compile minimum sufficient context pack for agent execution
 
 \x1b[1mSDLC GOVERNANCE COMMANDS:\x1b[0m
   \x1b[32minit <project-dir>\x1b[0m            Bootstrap a complete project skeleton with full SDLC OS
@@ -101,6 +103,9 @@ async function main() {
         break;
       case 'graph':
         await runGraph(commandArgs);
+        break;
+      case 'context':
+        await runContext(commandArgs);
         break;
       case 'init':
         await runInit(commandArgs);

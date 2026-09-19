@@ -104,3 +104,12 @@ export async function validateEvidence(projectRoot, evidence) {
   }
   return true;
 }
+
+export async function validateContextPack(projectRoot, contextPack) {
+  const schema = await loadSchema(projectRoot, 'context-pack.schema.json');
+  const errors = validateSchema(contextPack, schema);
+  if (errors.length > 0) {
+    throw new SchemaValidationError(`Context pack validation failed`, 'context-pack.schema.json', errors);
+  }
+  return true;
+}
