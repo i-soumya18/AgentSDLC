@@ -1,0 +1,930 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-09-19T20:00:54.723Z",
+  "nodes": [
+    {
+      "id": "PROD-001",
+      "type": "PRODUCT",
+      "name": "Pharmacy POS for inventory and billing",
+      "description": "Managing pharmacy inventory, sales, and prescription handling efficiently.",
+      "version": "1",
+      "status": "locked",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "product/product-contract.json",
+      "created_at": "2026-09-19T20:00:54.715Z",
+      "updated_at": "2026-09-19T20:00:54.715Z",
+      "data": {}
+    },
+    {
+      "id": "PERS-001",
+      "type": "PERSONA",
+      "name": "Pharmacist",
+      "description": "Dispensary and stock oversight",
+      "version": "1.0.0",
+      "status": "confirmed",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "product/users.md",
+      "created_at": "2026-09-19T20:00:54.716Z",
+      "updated_at": "2026-09-19T20:00:54.716Z",
+      "data": {}
+    },
+    {
+      "id": "PERS-002",
+      "type": "PERSONA",
+      "name": "Cashier",
+      "description": "Point of sale billing",
+      "version": "1.0.0",
+      "status": "confirmed",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "product/users.md",
+      "created_at": "2026-09-19T20:00:54.717Z",
+      "updated_at": "2026-09-19T20:00:54.717Z",
+      "data": {}
+    },
+    {
+      "id": "OUT-001",
+      "type": "OUTCOME",
+      "name": "Sub-150ms P95 latency on all primary workflows",
+      "description": "Sub-150ms P95 latency on all primary workflows",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "product/outcomes.md",
+      "created_at": "2026-09-19T20:00:54.717Z",
+      "updated_at": "2026-09-19T20:00:54.717Z",
+      "data": {}
+    },
+    {
+      "id": "OUT-002",
+      "type": "OUTCOME",
+      "name": "100% operational uptime and local transaction survivability",
+      "description": "100% operational uptime and local transaction survivability",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "product/outcomes.md",
+      "created_at": "2026-09-19T20:00:54.717Z",
+      "updated_at": "2026-09-19T20:00:54.717Z",
+      "data": {}
+    },
+    {
+      "id": "OUT-003",
+      "type": "OUTCOME",
+      "name": "Complete traceability from product requirements to test verification",
+      "description": "Complete traceability from product requirements to test verification",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "product/outcomes.md",
+      "created_at": "2026-09-19T20:00:54.717Z",
+      "updated_at": "2026-09-19T20:00:54.717Z",
+      "data": {}
+    },
+    {
+      "id": "FEAT-001",
+      "type": "FEATURE",
+      "name": "Inventory Management",
+      "description": "Track stock levels, reorder points, and item batches",
+      "version": "1.0.0",
+      "status": "confirmed",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "product/product-contract.md",
+      "created_at": "2026-09-19T20:00:54.717Z",
+      "updated_at": "2026-09-19T20:00:54.717Z",
+      "data": {}
+    },
+    {
+      "id": "FEAT-002",
+      "type": "FEATURE",
+      "name": "Billing & POS",
+      "description": "Process sales transactions, taxes, and receipt generation",
+      "version": "1.0.0",
+      "status": "confirmed",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "product/product-contract.md",
+      "created_at": "2026-09-19T20:00:54.717Z",
+      "updated_at": "2026-09-19T20:00:54.717Z",
+      "data": {}
+    },
+    {
+      "id": "FEAT-003",
+      "type": "FEATURE",
+      "name": "Prescription Tracking",
+      "description": "Record doctor prescriptions and patient dispensation history",
+      "version": "1.0.0",
+      "status": "confirmed",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "product/product-contract.md",
+      "created_at": "2026-09-19T20:00:54.717Z",
+      "updated_at": "2026-09-19T20:00:54.717Z",
+      "data": {}
+    },
+    {
+      "id": "REQ-001",
+      "type": "REQUIREMENT",
+      "name": "Inventory Management",
+      "description": "Track stock levels, reorder points, and item batches",
+      "version": "1.0.0",
+      "status": "confirmed",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "product/acceptance.md",
+      "created_at": "2026-09-19T20:00:54.717Z",
+      "updated_at": "2026-09-19T20:00:54.717Z",
+      "data": {
+        "acceptance_criteria": [
+          "Given an active store catalog, When an item quantity changes, Then the stock level updates immediately with timestamped audit logging.",
+          "Given an item with stock below reorder threshold, When inventory status is queried, Then an alert flag is emitted.",
+          "Given a concurrent sale and restock event, When transactions are committed, Then inventory updates are strictly serialized without negative balances."
+        ]
+      }
+    },
+    {
+      "id": "REQ-002",
+      "type": "REQUIREMENT",
+      "name": "Billing & POS",
+      "description": "Process sales transactions, taxes, and receipt generation",
+      "version": "1.0.0",
+      "status": "confirmed",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "product/acceptance.md",
+      "created_at": "2026-09-19T20:00:54.717Z",
+      "updated_at": "2026-09-19T20:00:54.717Z",
+      "data": {
+        "acceptance_criteria": [
+          "Given a cart with valid items, When checkout is finalized, Then a tax-compliant receipt is generated with unique transaction ID.",
+          "Given an offline terminal with cached product catalog, When a bill is processed, Then the sale is committed locally and queued for synchronization.",
+          "Given an invalid or negative total, When checkout is attempted, Then the transaction is rejected with RFC 7807 problem details."
+        ]
+      }
+    },
+    {
+      "id": "REQ-003",
+      "type": "REQUIREMENT",
+      "name": "Prescription Tracking",
+      "description": "Record doctor prescriptions and patient dispensation history",
+      "version": "1.0.0",
+      "status": "confirmed",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "product/acceptance.md",
+      "created_at": "2026-09-19T20:00:54.717Z",
+      "updated_at": "2026-09-19T20:00:54.717Z",
+      "data": {
+        "acceptance_criteria": [
+          "Given a patient record and prescribing doctor name, When prescription is registered, Then items and dosage instructions are durably stored.",
+          "Given a prescription-only drug, When dispensed at POS, Then the system verifies matching prescription ID before authorizing sale.",
+          "Given an expired or fully dispensed prescription, When dispensation is attempted, Then the action is blocked with an explicit error."
+        ]
+      }
+    },
+    {
+      "id": "CONTRACT-001",
+      "type": "CONTRACT",
+      "name": "Product Contract v1",
+      "description": "Cryptographic hash: sha256-ad5c7965d1949b6f79029e59f95fb88645cfccd82bbb740636534880534058d6",
+      "version": "1",
+      "status": "locked",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "product/product-contract.json",
+      "created_at": "2026-09-19T20:00:54.717Z",
+      "updated_at": "2026-09-19T20:00:54.717Z",
+      "data": {}
+    },
+    {
+      "id": "REQ-001.1",
+      "type": "REQUIREMENT",
+      "name": "REQ-001.1",
+      "description": "Declared in specs/001-ai-task-copilot/spec.md",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "specs/001-ai-task-copilot/spec.md",
+      "created_at": "2026-09-19T20:00:54.718Z",
+      "updated_at": "2026-09-19T20:00:54.718Z",
+      "data": {}
+    },
+    {
+      "id": "REQ-001.2",
+      "type": "REQUIREMENT",
+      "name": "REQ-001.2",
+      "description": "Declared in specs/001-ai-task-copilot/spec.md",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "specs/001-ai-task-copilot/spec.md",
+      "created_at": "2026-09-19T20:00:54.718Z",
+      "updated_at": "2026-09-19T20:00:54.718Z",
+      "data": {}
+    },
+    {
+      "id": "REQ-001.3",
+      "type": "REQUIREMENT",
+      "name": "REQ-001.3",
+      "description": "Declared in specs/001-ai-task-copilot/spec.md",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "specs/001-ai-task-copilot/spec.md",
+      "created_at": "2026-09-19T20:00:54.718Z",
+      "updated_at": "2026-09-19T20:00:54.718Z",
+      "data": {}
+    },
+    {
+      "id": "TASK-001.1",
+      "type": "TASK",
+      "name": "TASK-001.1",
+      "description": "**TASK-001.1**: Implement Task entity repository and in-memory/SQLite storage (maps to `REQ-001.1`)",
+      "version": "1.0.0",
+      "status": "completed",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "specs/001-ai-task-copilot/tasks.md",
+      "created_at": "2026-09-19T20:00:54.718Z",
+      "updated_at": "2026-09-19T20:00:54.718Z",
+      "data": {}
+    },
+    {
+      "id": "TASK-001.2",
+      "type": "TASK",
+      "name": "TASK-001.2",
+      "description": "**TASK-001.2**: Implement Task HTTP controller with RFC 7807 problem validation (maps to `REQ-001.2`)",
+      "version": "1.0.0",
+      "status": "completed",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "specs/001-ai-task-copilot/tasks.md",
+      "created_at": "2026-09-19T20:00:54.718Z",
+      "updated_at": "2026-09-19T20:00:54.718Z",
+      "data": {}
+    },
+    {
+      "id": "TASK-001.3",
+      "type": "TASK",
+      "name": "TASK-001.3",
+      "description": "**TASK-001.3**: Implement AI decomposition tool definition and eval benchmark (maps to `REQ-001.3`)",
+      "version": "1.0.0",
+      "status": "completed",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "specs/001-ai-task-copilot/tasks.md",
+      "created_at": "2026-09-19T20:00:54.718Z",
+      "updated_at": "2026-09-19T20:00:54.718Z",
+      "data": {}
+    },
+    {
+      "id": "UX-001-ai-task-copilot",
+      "type": "UX_ARTIFACT",
+      "name": "UX Interaction Model for 001-ai-task-copilot",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "specs/001-ai-task-copilot/ux.md",
+      "created_at": "2026-09-19T20:00:54.718Z",
+      "updated_at": "2026-09-19T20:00:54.718Z",
+      "data": {}
+    },
+    {
+      "id": "REQ-XXX.1",
+      "type": "REQUIREMENT",
+      "name": "REQ-XXX.1",
+      "description": "Declared in specs/template/spec.md",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "specs/template/spec.md",
+      "created_at": "2026-09-19T20:00:54.719Z",
+      "updated_at": "2026-09-19T20:00:54.719Z",
+      "data": {}
+    },
+    {
+      "id": "REQ-XXX.2",
+      "type": "REQUIREMENT",
+      "name": "REQ-XXX.2",
+      "description": "Declared in specs/template/spec.md",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "specs/template/spec.md",
+      "created_at": "2026-09-19T20:00:54.719Z",
+      "updated_at": "2026-09-19T20:00:54.719Z",
+      "data": {}
+    },
+    {
+      "id": "TASK-XXX.1",
+      "type": "TASK",
+      "name": "TASK-XXX.1",
+      "description": "**TASK-XXX.1**: [Slice 1 Title] (maps to `REQ-XXX.1`)",
+      "version": "1.0.0",
+      "status": "pending",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "specs/template/tasks.md",
+      "created_at": "2026-09-19T20:00:54.719Z",
+      "updated_at": "2026-09-19T20:00:54.719Z",
+      "data": {}
+    },
+    {
+      "id": "TASK-XXX.2",
+      "type": "TASK",
+      "name": "TASK-XXX.2",
+      "description": "**TASK-XXX.2**: [Slice 2 Title] (maps to `REQ-XXX.2`)",
+      "version": "1.0.0",
+      "status": "pending",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "specs/template/tasks.md",
+      "created_at": "2026-09-19T20:00:54.719Z",
+      "updated_at": "2026-09-19T20:00:54.719Z",
+      "data": {}
+    },
+    {
+      "id": "TASK-XXX.3",
+      "type": "TASK",
+      "name": "TASK-XXX.3",
+      "description": "**TASK-XXX.3**: [Slice 3 Title] (maps to `REQ-XXX.3`)",
+      "version": "1.0.0",
+      "status": "pending",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "specs/template/tasks.md",
+      "created_at": "2026-09-19T20:00:54.719Z",
+      "updated_at": "2026-09-19T20:00:54.719Z",
+      "data": {}
+    },
+    {
+      "id": "UX-template",
+      "type": "UX_ARTIFACT",
+      "name": "UX Interaction Model for template",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "specs/template/ux.md",
+      "created_at": "2026-09-19T20:00:54.719Z",
+      "updated_at": "2026-09-19T20:00:54.719Z",
+      "data": {}
+    },
+    {
+      "id": "0000-USE-SPEC-DRIVEN-DEVELOPMENT",
+      "type": "DECISION",
+      "name": "0000-use-spec-driven-development",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "docs/adr/0000-use-spec-driven-development.md",
+      "created_at": "2026-09-19T20:00:54.720Z",
+      "updated_at": "2026-09-19T20:00:54.720Z",
+      "data": {}
+    },
+    {
+      "id": "0001-MCP-LEAST-PRIVILEGE-MODEL",
+      "type": "DECISION",
+      "name": "0001-mcp-least-privilege-model",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "docs/adr/0001-mcp-least-privilege-model.md",
+      "created_at": "2026-09-19T20:00:54.720Z",
+      "updated_at": "2026-09-19T20:00:54.720Z",
+      "data": {}
+    },
+    {
+      "id": "0002-DUAL-TRACK-AI-TESTING",
+      "type": "DECISION",
+      "name": "0002-dual-track-ai-testing",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "docs/adr/0002-dual-track-ai-testing.md",
+      "created_at": "2026-09-19T20:00:54.720Z",
+      "updated_at": "2026-09-19T20:00:54.720Z",
+      "data": {}
+    },
+    {
+      "id": "0003-VERTICAL-SLICE-DECOMPOSITION",
+      "type": "DECISION",
+      "name": "0003-vertical-slice-decomposition",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "docs/adr/0003-vertical-slice-decomposition.md",
+      "created_at": "2026-09-19T20:00:54.720Z",
+      "updated_at": "2026-09-19T20:00:54.720Z",
+      "data": {}
+    },
+    {
+      "id": "0004-FOUNDATION-HARDENING-AND-CANONICAL-REGISTRIES",
+      "type": "DECISION",
+      "name": "0004-foundation-hardening-and-canonical-registries",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "docs/adr/0004-foundation-hardening-and-canonical-registries.md",
+      "created_at": "2026-09-19T20:00:54.720Z",
+      "updated_at": "2026-09-19T20:00:54.720Z",
+      "data": {}
+    },
+    {
+      "id": "TEST-ARTIFACT-SCHEMA",
+      "type": "TEST",
+      "name": "artifact-schema.test.js",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "tests/unit/artifact-schema.test.js",
+      "created_at": "2026-09-19T20:00:54.720Z",
+      "updated_at": "2026-09-19T20:00:54.720Z",
+      "data": {}
+    },
+    {
+      "id": "TEST-CLI",
+      "type": "TEST",
+      "name": "cli.test.js",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "tests/unit/cli.test.js",
+      "created_at": "2026-09-19T20:00:54.720Z",
+      "updated_at": "2026-09-19T20:00:54.720Z",
+      "data": {}
+    },
+    {
+      "id": "TEST-CONTRACT",
+      "type": "TEST",
+      "name": "contract.test.js",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "tests/contract/contract.test.js",
+      "created_at": "2026-09-19T20:00:54.723Z",
+      "updated_at": "2026-09-19T20:00:54.723Z",
+      "data": {}
+    },
+    {
+      "id": "TEST-DISCOVERY",
+      "type": "TEST",
+      "name": "discovery.test.js",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "tests/unit/discovery.test.js",
+      "created_at": "2026-09-19T20:00:54.721Z",
+      "updated_at": "2026-09-19T20:00:54.721Z",
+      "data": {}
+    },
+    {
+      "id": "TEST-GATES",
+      "type": "TEST",
+      "name": "gates.test.js",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "tests/unit/gates.test.js",
+      "created_at": "2026-09-19T20:00:54.721Z",
+      "updated_at": "2026-09-19T20:00:54.721Z",
+      "data": {}
+    },
+    {
+      "id": "TEST-GRAPH",
+      "type": "TEST",
+      "name": "graph.test.js",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "tests/unit/graph.test.js",
+      "created_at": "2026-09-19T20:00:54.722Z",
+      "updated_at": "2026-09-19T20:00:54.722Z",
+      "data": {}
+    },
+    {
+      "id": "TEST-LIFECYCLE",
+      "type": "TEST",
+      "name": "lifecycle.test.js",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "tests/unit/lifecycle.test.js",
+      "created_at": "2026-09-19T20:00:54.722Z",
+      "updated_at": "2026-09-19T20:00:54.722Z",
+      "data": {}
+    },
+    {
+      "id": "TEST-TASK",
+      "type": "TEST",
+      "name": "task.test.js",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "tests/unit/task.test.js",
+      "created_at": "2026-09-19T20:00:54.722Z",
+      "updated_at": "2026-09-19T20:00:54.722Z",
+      "data": {}
+    },
+    {
+      "id": "EVID-VERIFICATION-001",
+      "type": "EVIDENCE",
+      "name": "Full SDLC Verification Report",
+      "description": "",
+      "version": "1.0.0",
+      "status": "active",
+      "parent": null,
+      "dependencies": [],
+      "references": [],
+      "evidence": [],
+      "source_file": "specs/001-ai-task-copilot/verification.md",
+      "created_at": "2026-09-19T20:00:54.723Z",
+      "updated_at": "2026-09-19T20:00:54.723Z",
+      "data": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "PROD-001",
+      "to": "PERS-001",
+      "relationship": "serves",
+      "metadata": {}
+    },
+    {
+      "from": "PROD-001",
+      "to": "PERS-002",
+      "relationship": "serves",
+      "metadata": {}
+    },
+    {
+      "from": "PROD-001",
+      "to": "OUT-001",
+      "relationship": "achieves",
+      "metadata": {}
+    },
+    {
+      "from": "PROD-001",
+      "to": "OUT-002",
+      "relationship": "achieves",
+      "metadata": {}
+    },
+    {
+      "from": "PROD-001",
+      "to": "OUT-003",
+      "relationship": "achieves",
+      "metadata": {}
+    },
+    {
+      "from": "PROD-001",
+      "to": "FEAT-001",
+      "relationship": "contains",
+      "metadata": {}
+    },
+    {
+      "from": "PROD-001",
+      "to": "FEAT-002",
+      "relationship": "contains",
+      "metadata": {}
+    },
+    {
+      "from": "PROD-001",
+      "to": "FEAT-003",
+      "relationship": "contains",
+      "metadata": {}
+    },
+    {
+      "from": "PROD-001",
+      "to": "TEST-ARTIFACT-SCHEMA",
+      "relationship": "verified_by",
+      "metadata": {}
+    },
+    {
+      "from": "PROD-001",
+      "to": "TEST-CLI",
+      "relationship": "verified_by",
+      "metadata": {}
+    },
+    {
+      "from": "PROD-001",
+      "to": "TEST-DISCOVERY",
+      "relationship": "verified_by",
+      "metadata": {}
+    },
+    {
+      "from": "PROD-001",
+      "to": "TEST-GATES",
+      "relationship": "verified_by",
+      "metadata": {}
+    },
+    {
+      "from": "PROD-001",
+      "to": "TEST-LIFECYCLE",
+      "relationship": "verified_by",
+      "metadata": {}
+    },
+    {
+      "from": "PROD-001",
+      "to": "TEST-CONTRACT",
+      "relationship": "verified_by",
+      "metadata": {}
+    },
+    {
+      "from": "FEAT-001",
+      "to": "REQ-001",
+      "relationship": "contains",
+      "metadata": {}
+    },
+    {
+      "from": "FEAT-002",
+      "to": "REQ-002",
+      "relationship": "contains",
+      "metadata": {}
+    },
+    {
+      "from": "FEAT-003",
+      "to": "REQ-003",
+      "relationship": "contains",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-001",
+      "to": "CONTRACT-001",
+      "relationship": "constrained_by",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-001",
+      "to": "TEST-GRAPH",
+      "relationship": "verified_by",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-002",
+      "to": "CONTRACT-001",
+      "relationship": "constrained_by",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-003",
+      "to": "CONTRACT-001",
+      "relationship": "constrained_by",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-001.1",
+      "to": "TASK-001.1",
+      "relationship": "implemented_by",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-001.1",
+      "to": "UX-001-ai-task-copilot",
+      "relationship": "represented_by",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-001.1",
+      "to": "TEST-TASK",
+      "relationship": "verified_by",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-001.2",
+      "to": "TASK-001.2",
+      "relationship": "implemented_by",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-001.2",
+      "to": "UX-001-ai-task-copilot",
+      "relationship": "represented_by",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-001.2",
+      "to": "TEST-TASK",
+      "relationship": "verified_by",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-001.3",
+      "to": "TASK-001.3",
+      "relationship": "implemented_by",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-001.3",
+      "to": "UX-001-ai-task-copilot",
+      "relationship": "represented_by",
+      "metadata": {}
+    },
+    {
+      "from": "TASK-001.1",
+      "to": "EVID-VERIFICATION-001",
+      "relationship": "produces",
+      "metadata": {}
+    },
+    {
+      "from": "TASK-001.2",
+      "to": "EVID-VERIFICATION-001",
+      "relationship": "produces",
+      "metadata": {}
+    },
+    {
+      "from": "TASK-001.3",
+      "to": "EVID-VERIFICATION-001",
+      "relationship": "produces",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-XXX.1",
+      "to": "TASK-XXX.1",
+      "relationship": "implemented_by",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-XXX.1",
+      "to": "UX-template",
+      "relationship": "represented_by",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-XXX.2",
+      "to": "TASK-XXX.2",
+      "relationship": "implemented_by",
+      "metadata": {}
+    },
+    {
+      "from": "REQ-XXX.2",
+      "to": "UX-template",
+      "relationship": "represented_by",
+      "metadata": {}
+    },
+    {
+      "from": "TASK-XXX.1",
+      "to": "EVID-VERIFICATION-001",
+      "relationship": "produces",
+      "metadata": {}
+    },
+    {
+      "from": "TASK-XXX.2",
+      "to": "EVID-VERIFICATION-001",
+      "relationship": "produces",
+      "metadata": {}
+    },
+    {
+      "from": "TASK-XXX.3",
+      "to": "EVID-VERIFICATION-001",
+      "relationship": "produces",
+      "metadata": {}
+    },
+    {
+      "from": "0000-USE-SPEC-DRIVEN-DEVELOPMENT",
+      "to": "PROD-001",
+      "relationship": "affects",
+      "metadata": {}
+    },
+    {
+      "from": "0001-MCP-LEAST-PRIVILEGE-MODEL",
+      "to": "PROD-001",
+      "relationship": "affects",
+      "metadata": {}
+    },
+    {
+      "from": "0002-DUAL-TRACK-AI-TESTING",
+      "to": "PROD-001",
+      "relationship": "affects",
+      "metadata": {}
+    },
+    {
+      "from": "0003-VERTICAL-SLICE-DECOMPOSITION",
+      "to": "PROD-001",
+      "relationship": "affects",
+      "metadata": {}
+    },
+    {
+      "from": "0004-FOUNDATION-HARDENING-AND-CANONICAL-REGISTRIES",
+      "to": "PROD-001",
+      "relationship": "affects",
+      "metadata": {}
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://engineering-os.dev/schemas/knowledge-graph.schema.json",
+  "title": "ProductKnowledgeGraph",
+  "description": "Traceable engineering knowledge graph specification connecting all AgentSDLC entities",
+  "type": "object",
+  "required": ["version", "generated_at", "nodes", "edges"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Graph model version"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "name", "version", "status", "created_at", "updated_at"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique stable identifier for the artifact entity"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "PRODUCT",
+              "PERSONA",
+              "PROBLEM",
+              "OUTCOME",
+              "FEATURE",
+              "REQUIREMENT",
+              "UX_ARTIFACT",
+              "ARCHITECTURE",
+              "CONTRACT",
+              "TASK",
+              "TEST",
+              "EVALUATION",
+              "EVIDENCE",
+              "DECISION",
+              "ASSUMPTION",
+              "CHANGE_REQUEST",
+              "RELEASE"
+            ]
+          },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "version": { "type": "string" },
+          "status": { "type": "string" },
+          "parent": { "type": ["string", "null"] },
+          "dependencies": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "references": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "evidence": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "source_file": { "type": ["string", "null"] },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" },
+          "data": { "type": "object" }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "relationship"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "relationship": {
+            "type": "string",
+            "enum": [
+              "contains",
+              "serves",
+              "achieves",
+              "implemented_by",
+              "verified_by",
+              "represented_by",
+              "constrained_by",
+              "produces",
+              "affects",
+              "depends_on",
+              "references",
+              "modifies"
+            ]
+          },
+          "metadata": { "type": "object" }
+        }
+      }
+    }
+  }
+}

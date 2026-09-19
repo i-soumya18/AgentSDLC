@@ -39,6 +39,13 @@ export {
 // Product Contract & Scope Lock (Phase 2)
 export { ProductContractEngine } from './contract/product-contract-engine.js';
 
+// Product Knowledge Graph (Phase 3)
+export {
+  ProductKnowledgeGraph,
+  ENTITY_TYPES,
+  RELATIONSHIPS
+} from './graph/product-knowledge-graph.js';
+
 // Verification & Eval Harness
 export { executeVerification } from './verification/verify-runner.js';
 export { runEval } from './eval/eval-runner.js';
@@ -49,6 +56,7 @@ export { runDiscover } from './cli/discover.js';
 export { runClarify } from './cli/clarify.js';
 export { runContract } from './cli/contract.js';
 export { runApprove, runReject } from './cli/approve.js';
+export { runGraph } from './cli/graph.js';
 export { runInit } from './cli/init.js';
 export { runStage } from './cli/stage.js';
 export { runGate } from './cli/gate.js';
