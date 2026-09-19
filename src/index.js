@@ -5,7 +5,10 @@ export {
   LifecycleError,
   QualityGateError,
   DriftError,
-  SchemaValidationError
+  SchemaValidationError,
+  ContractError,
+  ContractIntegrityError,
+  ScopeViolationError
 } from './core/errors.js';
 
 // Canonical Registries
@@ -33,6 +36,9 @@ export {
   loadDiscoveryState
 } from './discovery/discovery-engine.js';
 
+// Product Contract & Scope Lock (Phase 2)
+export { ProductContractEngine } from './contract/product-contract-engine.js';
+
 // Verification & Eval Harness
 export { executeVerification } from './verification/verify-runner.js';
 export { runEval } from './eval/eval-runner.js';
@@ -41,9 +47,12 @@ export { runEval } from './eval/eval-runner.js';
 export { runIdea } from './cli/idea.js';
 export { runDiscover } from './cli/discover.js';
 export { runClarify } from './cli/clarify.js';
+export { runContract } from './cli/contract.js';
+export { runApprove, runReject } from './cli/approve.js';
 export { runInit } from './cli/init.js';
 export { runStage } from './cli/stage.js';
 export { runGate } from './cli/gate.js';
 export { runDrift } from './cli/drift.js';
 export { runStatus } from './cli/status.js';
 export { runVerify } from './cli/verify.js';
+

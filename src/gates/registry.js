@@ -12,6 +12,24 @@ export const GATE_REGISTRY = {
     evaluatorRole: 'Human Product Owner',
     blocking: true,
     evaluate: async (projectRoot, featureId) => {
+      // Check if product contract approval exists
+      const approvalPath = path.join(projectRoot, 'product', 'approval.json');
+      try {
+        const rawApproval = await fs.readFile(approvalPath, 'utf8');
+        const approval = JSON.parse(rawApproval);
+        if (approval.approved === false) {
+          return {
+            id: 'product',
+            name: 'Product Gate',
+            passed: false,
+            status: 'FAIL',
+            evidence: `Product Contract is not approved (status: ${approval.status || 'UNAPPROVED'}, reason: ${approval.rejection_reason || 'Pending'})`
+          };
+        }
+      } catch {
+        // No approval.json yet; fallback to charter check
+      }
+
       const charterPath = path.join(projectRoot, 'specs', '000-project-charter.md');
       try {
         const content = await fs.readFile(charterPath, 'utf8');

@@ -1,0 +1,200 @@
+{
+  "contract_version": 1,
+  "product": {
+    "name": "Pharmacy POS for inventory and billing",
+    "domain": "healthcare/pharmacy",
+    "description": "Managing pharmacy inventory, sales, and prescription handling efficiently."
+  },
+  "problem": "Managing pharmacy inventory, sales, and prescription handling efficiently.",
+  "users": [
+    {
+      "persona": "Pharmacist",
+      "needs": "Dispensary and stock oversight",
+      "confirmed": true
+    },
+    {
+      "persona": "Cashier",
+      "needs": "Point of sale billing",
+      "confirmed": true
+    }
+  ],
+  "desired_outcomes": [
+    "Sub-150ms P95 latency on all primary workflows",
+    "100% operational uptime and local transaction survivability",
+    "Complete traceability from product requirements to test verification"
+  ],
+  "mvp_scope": {
+    "summary": "MVP release delivering core operational capabilities for Pharmacist, Cashier",
+    "included_features": [
+      "Inventory Management",
+      "Billing & POS",
+      "Prescription Tracking"
+    ]
+  },
+  "out_of_scope": [
+    "Multi-hospital enterprise EHR synchronization (Deferred to v2)",
+    "Third-party health insurance claim clearinghouse gateway (Deferred to v2)",
+    "Custom peripheral firmware drivers / hardware manufacturing"
+  ],
+  "features": [
+    {
+      "id": "FEAT-001",
+      "name": "Inventory Management",
+      "description": "Track stock levels, reorder points, and item batches",
+      "priority": "must",
+      "status": "confirmed"
+    },
+    {
+      "id": "FEAT-002",
+      "name": "Billing & POS",
+      "description": "Process sales transactions, taxes, and receipt generation",
+      "priority": "must",
+      "status": "confirmed"
+    },
+    {
+      "id": "FEAT-003",
+      "name": "Prescription Tracking",
+      "description": "Record doctor prescriptions and patient dispensation history",
+      "priority": "must",
+      "status": "confirmed"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "title": "Inventory Management",
+      "type": "confirmed",
+      "description": "Track stock levels, reorder points, and item batches",
+      "acceptance_criteria": [
+        "Given an active store catalog, When an item quantity changes, Then the stock level updates immediately with timestamped audit logging.",
+        "Given an item with stock below reorder threshold, When inventory status is queried, Then an alert flag is emitted.",
+        "Given a concurrent sale and restock event, When transactions are committed, Then inventory updates are strictly serialized without negative balances."
+      ]
+    },
+    {
+      "id": "REQ-002",
+      "title": "Billing & POS",
+      "type": "confirmed",
+      "description": "Process sales transactions, taxes, and receipt generation",
+      "acceptance_criteria": [
+        "Given a cart with valid items, When checkout is finalized, Then a tax-compliant receipt is generated with unique transaction ID.",
+        "Given an offline terminal with cached product catalog, When a bill is processed, Then the sale is committed locally and queued for synchronization.",
+        "Given an invalid or negative total, When checkout is attempted, Then the transaction is rejected with RFC 7807 problem details."
+      ]
+    },
+    {
+      "id": "REQ-003",
+      "title": "Prescription Tracking",
+      "type": "confirmed",
+      "description": "Record doctor prescriptions and patient dispensation history",
+      "acceptance_criteria": [
+        "Given a patient record and prescribing doctor name, When prescription is registered, Then items and dosage instructions are durably stored.",
+        "Given a prescription-only drug, When dispensed at POS, Then the system verifies matching prescription ID before authorizing sale.",
+        "Given an expired or fully dispensed prescription, When dispensation is attempted, Then the action is blocked with an explicit error."
+      ]
+    }
+  ],
+  "ux_preferences": {
+    "style": "standard",
+    "platforms": [
+      "Mobile"
+    ]
+  },
+  "technology_preferences": {
+    "architecture_style": "Offline-first client with durable local cache & background synchronization",
+    "languages_frameworks": [
+      "Node.js (v24+ Native ESM)",
+      "SQLite / Structured Storage",
+      "Vanilla CSS / Tokens"
+    ]
+  },
+  "constraints": [
+    {
+      "type": "connectivity",
+      "description": "Offline-first billing with local SQLite cache",
+      "confirmed": true
+    },
+    {
+      "type": "architecture",
+      "description": "Single store architecture (no multi-branch complexity)",
+      "confirmed": true
+    }
+  ],
+  "security_requirements": [
+    "OWASP API Security Top 10 compliance on all endpoints",
+    "Role-based access control (RBAC) separating administrative and standard operators",
+    "Encrypted local storage and parameterized database queries to prevent SQL injection",
+    "Zero credential or token logging in diagnostic audit trails"
+  ],
+  "performance_expectations": {
+    "latency_p95": "150ms for synchronous operations",
+    "throughput": "100 requests / second per local terminal",
+    "availability": "99.9% availability with local offline fallback"
+  },
+  "deployment_expectations": {
+    "environment": "Local Docker container or native Node.js runtime",
+    "target": "Single store appliance or lightweight desktop/mobile runner"
+  },
+  "acceptance_criteria": [
+    "All must-have MVP features implemented and verified with automated tests",
+    "Zero critical or high security vulnerabilities detected by static analysis",
+    "Offline transactions successfully commit locally and survive unexpected restarts",
+    "Verification suite passes 100% with zero unresolved requirement drift"
+  ],
+  "success_criteria": [
+    "100% requirement-to-test traceability demonstrated in verification report",
+    "Zero data loss on unexpected terminal shutdown",
+    "Positive user acceptance sign-off on core billing and inventory workflows"
+  ],
+  "open_questions": [
+    {
+      "id": "UNK-USER",
+      "question": "Who are the primary people using this application (e.g. pharmacists, cashiers, store owners, or general consumers)?",
+      "impact": "critical",
+      "resolved": true,
+      "answer": "Single pharmacy location, offline billing needed, for pharmacists and cashiers, mobile Android"
+    },
+    {
+      "id": "UNK-OFFLINE",
+      "question": "Does billing need to function offline without an active internet connection?",
+      "impact": "high",
+      "resolved": true,
+      "answer": "Offline billing required"
+    },
+    {
+      "id": "UNK-PRESCRIPTION",
+      "question": "Should the MVP support prescription tracking and doctor details, or only general retail products?",
+      "impact": "high",
+      "resolved": true,
+      "answer": "Prescription tracking enabled"
+    },
+    {
+      "id": "UNK-BRANCH",
+      "question": "Is this for a single store/pharmacy location or multiple branches with centralized reporting?",
+      "impact": "high",
+      "resolved": true,
+      "answer": "Single pharmacy location"
+    },
+    {
+      "id": "UNK-PLATFORM",
+      "question": "What platform will users access this on (Web browser, Mobile Android/iOS, or Desktop application)?",
+      "impact": "medium",
+      "resolved": true,
+      "answer": "Mobile Android"
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "ASSUMPTION-001",
+      "assumption": "Application requires secure transaction recording and audit logs",
+      "impact_if_invalid": "high",
+      "validation_status": "pending"
+    }
+  ],
+  "scope_locked": true,
+  "contract_hash": "sha256-ad5c7965d1949b6f79029e59f95fb88645cfccd82bbb740636534880534058d6",
+  "metadata": {
+    "generated_at": "2026-09-19T19:57:26.205Z",
+    "updated_at": "2026-09-19T19:57:32.877Z"
+  }
+}

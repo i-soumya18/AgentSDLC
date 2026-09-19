@@ -10,6 +10,8 @@ import { runVerify } from '../src/cli/verify.js';
 import { runIdea } from '../src/cli/idea.js';
 import { runDiscover } from '../src/cli/discover.js';
 import { runClarify } from '../src/cli/clarify.js';
+import { runContract } from '../src/cli/contract.js';
+import { runApprove, runReject } from '../src/cli/approve.js';
 import { STAGES } from '../src/lifecycle/stages.js';
 
 const HELP_TEXT = `
@@ -24,6 +26,9 @@ const HELP_TEXT = `
   \x1b[32midea "<description>"\x1b[0m          Ingest raw idea and bootstrap adaptive product discovery
   \x1b[32mdiscover\x1b[0m                      View current discovery state, completeness, and pending questions
   \x1b[32mclarify "<answers>"\x1b[0m           Provide clarification answers, resolve unknowns and assumptions
+  \x1b[32mcontract [--verify|change]\x1b[0m    Generate contract, audit integrity, or initiate scope change
+  \x1b[32mapprove [--by <name>]\x1b[0m         Mutually approve product contract and cryptographically lock scope
+  \x1b[32mreject [--reason <reason>]\x1b[0m    Record rejection of current product contract
 
 \x1b[1mSDLC GOVERNANCE COMMANDS:\x1b[0m
   \x1b[32minit <project-dir>\x1b[0m            Bootstrap a complete project skeleton with full SDLC OS
@@ -51,8 +56,9 @@ const HELP_TEXT = `
   eos idea "Pharmacy POS for inventory and billing"
   eos discover
   eos clarify "Single store, offline billing needed, for pharmacists"
-  eos stage specify 001-user-auth
-  eos gate all
+  eos contract
+  eos approve --by "Lead Architect"
+  eos contract --verify
   eos verify
 `;
 
@@ -82,6 +88,15 @@ async function main() {
       case 'clarify':
         await runClarify(commandArgs);
         break;
+      case 'contract':
+        await runContract(commandArgs);
+        break;
+      case 'approve':
+        await runApprove(commandArgs);
+        break;
+      case 'reject':
+        await runReject(commandArgs);
+        break;
       case 'init':
         await runInit(commandArgs);
         break;
@@ -107,6 +122,7 @@ async function main() {
         console.error(`\x1b[31mUnknown command: ${command}\x1b[0m\nUse --help to view available commands.`);
         process.exit(1);
     }
+
   } catch (err) {
     console.error(`\x1b[31mError:\x1b[0m ${err.message}`);
     if (process.env.DEBUG) console.error(err.stack);

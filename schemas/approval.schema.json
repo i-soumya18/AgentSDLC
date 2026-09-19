@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://engineering-os.dev/schemas/approval.schema.json",
+  "title": "ContractApproval",
+  "description": "Durable approval event and scope lock certificate for Product Contract",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "approved",
+    "approved_at",
+    "approved_by",
+    "contract_hash",
+    "status"
+  ],
+  "properties": {
+    "contract_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "approved": {
+      "type": "boolean"
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "approved_by": {
+      "type": "string"
+    },
+    "contract_hash": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["APPROVED", "REJECTED", "PENDING"]
+    },
+    "rejection_reason": {
+      "type": ["string", "null"]
+    }
+  }
+}
