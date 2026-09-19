@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://engineering-os.dev/schemas/design-system.schema.json",
+  "title": "Design System Specification",
+  "description": "Canonical design system tokens and visual style constraints for implementation-ready UI",
+  "type": "object",
+  "required": [
+    "name",
+    "version",
+    "visual_style",
+    "color_system",
+    "typography",
+    "spacing",
+    "density",
+    "radius",
+    "motion",
+    "elevation",
+    "platforms",
+    "accessibility"
+  ],
+  "properties": {
+    "name": { "type": "string" },
+    "version": { "type": "string", "default": "1.0.0" },
+    "visual_style": { "type": "string" },
+    "density": {
+      "type": "string",
+      "enum": ["compact", "comfortable", "spacious", "standard"]
+    },
+    "platforms": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "color_system": {
+      "type": "object",
+      "required": ["primary", "secondary", "neutral", "status"],
+      "properties": {
+        "primary": { "type": "string" },
+        "primary_foreground": { "type": "string" },
+        "secondary": { "type": "string" },
+        "secondary_foreground": { "type": "string" },
+        "accent": { "type": "string" },
+        "background": { "type": "string" },
+        "surface": { "type": "string" },
+        "neutral": {
+          "type": "object",
+          "properties": {
+            "border": { "type": "string" },
+            "text_primary": { "type": "string" },
+            "text_secondary": { "type": "string" },
+            "text_muted": { "type": "string" }
+          }
+        },
+        "status": {
+          "type": "object",
+          "required": ["success", "warning", "error", "info"],
+          "properties": {
+            "success": { "type": "string" },
+            "warning": { "type": "string" },
+            "error": { "type": "string" },
+            "info": { "type": "string" }
+          }
+        }
+      }
+    },
+    "typography": {
+      "type": "object",
+      "required": ["font_family", "font_sizes", "font_weights"],
+      "properties": {
+        "font_family": {
+          "type": "object",
+          "required": ["sans", "mono"],
+          "properties": {
+            "sans": { "type": "string" },
+            "mono": { "type": "string" }
+          }
+        },
+        "font_sizes": { "type": "object" },
+        "font_weights": { "type": "object" }
+      }
+    },
+    "spacing": {
+      "type": "object",
+      "required": ["unit_px", "scale"],
+      "properties": {
+        "unit_px": { "type": "integer" },
+        "scale": { "type": "object" }
+      }
+    },
+    "radius": {
+      "type": "object",
+      "required": ["sm", "md", "lg", "full"],
+      "properties": {
+        "sm": { "type": "string" },
+        "md": { "type": "string" },
+        "lg": { "type": "string" },
+        "full": { "type": "string" }
+      }
+    },
+    "motion": {
+      "type": "object",
+      "required": ["durations", "easings"],
+      "properties": {
+        "durations": { "type": "object" },
+        "easings": { "type": "object" }
+      }
+    },
+    "elevation": {
+      "type": "object",
+      "required": ["sm", "md", "lg"],
+      "properties": {
+        "sm": { "type": "string" },
+        "md": { "type": "string" },
+        "lg": { "type": "string" }
+      }
+    },
+    "responsive_breakpoints": {
+      "type": "object",
+      "properties": {
+        "sm": { "type": "string" },
+        "md": { "type": "string" },
+        "lg": { "type": "string" },
+        "xl": { "type": "string" }
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "required": ["wcag_level", "min_contrast_ratio", "focus_indicator"],
+      "properties": {
+        "wcag_level": { "type": "string", "enum": ["AA", "AAA"] },
+        "min_contrast_ratio": { "type": "number" },
+        "focus_indicator": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": true
+}

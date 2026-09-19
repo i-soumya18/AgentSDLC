@@ -113,3 +113,39 @@ export async function validateContextPack(projectRoot, contextPack) {
   }
   return true;
 }
+
+export async function validateDesignSystem(projectRoot, designSystem) {
+  const schema = await loadSchema(projectRoot, 'design-system.schema.json');
+  const errors = validateSchema(designSystem, schema);
+  if (errors.length > 0) {
+    throw new SchemaValidationError(`Design system validation failed`, 'design-system.schema.json', errors);
+  }
+  return true;
+}
+
+export async function validateComponentSpecification(projectRoot, component) {
+  const schema = await loadSchema(projectRoot, 'component-specification.schema.json');
+  const errors = validateSchema(component, schema);
+  if (errors.length > 0) {
+    throw new SchemaValidationError(`Component specification validation failed`, 'component-specification.schema.json', errors);
+  }
+  return true;
+}
+
+export async function validateScreenSpecification(projectRoot, screen) {
+  const schema = await loadSchema(projectRoot, 'screen-specification.schema.json');
+  const errors = validateSchema(screen, schema);
+  if (errors.length > 0) {
+    throw new SchemaValidationError(`Screen specification validation failed`, 'screen-specification.schema.json', errors);
+  }
+  return true;
+}
+
+export async function validateDesignSpec(projectRoot, designSpec) {
+  const schema = await loadSchema(projectRoot, 'design-spec.schema.json');
+  const errors = validateSchema(designSpec, schema);
+  if (errors.length > 0) {
+    throw new SchemaValidationError(`Master design bundle validation failed`, 'design-spec.schema.json', errors);
+  }
+  return true;
+}

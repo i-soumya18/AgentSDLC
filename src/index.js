@@ -23,7 +23,11 @@ export {
   validateDecision,
   validateAssumption,
   validateEvidence,
-  validateContextPack
+  validateContextPack,
+  validateDesignSystem,
+  validateComponentSpecification,
+  validateScreenSpecification,
+  validateDesignSpec
 } from './artifacts/validator.js';
 
 // Product Discovery Engine (Phase 1)
@@ -72,6 +76,14 @@ export {
   formatPrompt
 } from './context/formatter.js';
 
+// Design Factory (Phase 5)
+export { DesignFactory } from './design/design-factory.js';
+export {
+  DesignTraceabilityValidator,
+  CANONICAL_INTERACTION_STATES
+} from './design/traceability-validator.js';
+export { DesignExporter } from './design/design-exporter.js';
+
 // Verification & Eval Harness
 export { executeVerification } from './verification/verify-runner.js';
 export { runEval } from './eval/eval-runner.js';
@@ -84,6 +96,7 @@ export { runContract } from './cli/contract.js';
 export { runApprove, runReject } from './cli/approve.js';
 export { runGraph } from './cli/graph.js';
 export { runContext } from './cli/context.js';
+export { runDesign } from './cli/design.js';
 export { runInit } from './cli/init.js';
 export { runStage } from './cli/stage.js';
 export { runGate } from './cli/gate.js';

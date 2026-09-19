@@ -1,0 +1,157 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://engineering-os.dev/schemas/design-spec.schema.json",
+  "title": "Master Design Specification Bundle",
+  "description": "Comprehensive design factory bundle linking personas, journeys, IA, flows, design system tokens, screens, and components",
+  "type": "object",
+  "required": [
+    "feature_id",
+    "version",
+    "personas",
+    "journeys",
+    "information_architecture",
+    "user_flows",
+    "design_preferences",
+    "design_assumptions",
+    "design_system",
+    "screens",
+    "components",
+    "traceability"
+  ],
+  "properties": {
+    "feature_id": { "type": "string" },
+    "version": { "type": "string", "default": "1.0.0" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "personas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "role", "goals", "pain_points"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "role": { "type": "string" },
+          "goals": { "type": "array", "items": { "type": "string" } },
+          "pain_points": { "type": "array", "items": { "type": "string" } },
+          "device_context": { "type": "string" }
+        }
+      }
+    },
+    "journeys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "persona_id", "stages"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "persona_id": { "type": "string" },
+          "stages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["stage_name", "user_action", "system_response"],
+              "properties": {
+                "stage_name": { "type": "string" },
+                "user_action": { "type": "string" },
+                "system_response": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "information_architecture": {
+      "type": "object",
+      "required": ["navigation_model", "hierarchy", "views"],
+      "properties": {
+        "navigation_model": { "type": "string" },
+        "hierarchy": { "type": "array", "items": { "type": "string" } },
+        "views": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "user_flows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["flow_id", "title", "steps"],
+        "properties": {
+          "flow_id": { "type": "string" },
+          "title": { "type": "string" },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["step", "action", "target_screen"],
+              "properties": {
+                "step": { "type": "integer" },
+                "action": { "type": "string" },
+                "target_screen": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "design_preferences": {
+      "type": "object",
+      "required": ["visual_style", "density", "platforms"],
+      "properties": {
+        "visual_style": { "type": "string" },
+        "color_system": { "type": "string" },
+        "typography": { "type": "string" },
+        "spacing": { "type": "string" },
+        "density": { "type": "string" },
+        "radius": { "type": "string" },
+        "motion": { "type": "string" },
+        "accessibility": { "type": "string" },
+        "platform": { "type": "string" },
+        "platforms": { "type": "array", "items": { "type": "string" } },
+        "reference_products": { "type": "array", "items": { "type": "string" } },
+        "brand": { "type": "string" },
+        "restrictions": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "design_assumptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "assumption", "rationalization"],
+        "properties": {
+          "id": { "type": "string" },
+          "category": { "type": "string" },
+          "assumption": { "type": "string" },
+          "rationalization": { "type": "string" }
+        }
+      }
+    },
+    "design_system": { "type": "object" },
+    "screens": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "components": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "traceability": {
+      "type": "object",
+      "required": ["matrix"],
+      "properties": {
+        "matrix": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["requirement_id", "screen_ids", "component_ids"],
+            "properties": {
+              "requirement_id": { "type": "string" },
+              "screen_ids": { "type": "array", "items": { "type": "string" } },
+              "component_ids": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

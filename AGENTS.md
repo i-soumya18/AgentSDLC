@@ -99,6 +99,16 @@ project_manifest:
         - "Context efficiency metrics (token estimation, compression ratio, relevance density)"
         - "100% explainability: every included item has an explicit reason"
         - "CLI command 'eos context' with multi-format rendering (JSON, Markdown, System Prompt)"
+    - milestone_id: "M5"
+      name: "Design Factory & Design-to-Code Contracts"
+      status: "COMPLETED"
+      deliverables:
+        - "UX & UI specification pipeline (Personas, Journeys, IA, User Flows, Wireframes)"
+        - "Design System Tokens (HSL palette, typography scale, 8px grid, radius, motion, elevation)"
+        - "Machine-readable Design-to-Code contracts with mandatory 8-state interaction matrices"
+        - "Screen specifications with explicit requirement traceability (requirement → screen → component)"
+        - "Automated traceability and completeness validator (DesignTraceabilityValidator)"
+        - "CLI command 'eos design [generate|check|tokens|screens|components]'"
 ```
 
 ---

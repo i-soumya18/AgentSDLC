@@ -1,0 +1,360 @@
+[
+  {
+    "id": "COMP-TASK-CREATOR",
+    "name": "Task Creator Input Form",
+    "category": "input",
+    "screen_id": "SCREEN-TASK-DASHBOARD",
+    "description": "Primary input component for creating and decomposing new tasks",
+    "states": {
+      "initial": {
+        "description": "Input field idle with placeholder \"Describe feature to decompose...\""
+      },
+      "loading": {
+        "description": "Disabled submit button with animated spinner; opacity 0.7"
+      },
+      "success": {
+        "description": "Green highlight ring, input cleared, toast notification displayed"
+      },
+      "empty": {
+        "description": "Default placeholder rendered; validation message hidden"
+      },
+      "error": {
+        "description": "Red border (status.error), RFC 7807 error detail displayed below input"
+      },
+      "partial": {
+        "description": "Title validated locally; remote AI tags pending background fetch"
+      },
+      "offline": {
+        "description": "Offline warning badge; input disabled with \"Offline mode\" notice"
+      },
+      "destructive": {
+        "description": "Clear form warning dialog if dirty state exists"
+      }
+    },
+    "dimensions": {
+      "width": "100%",
+      "min_height": "44px",
+      "padding": "8px 16px",
+      "margin": "0 0 16px 0"
+    },
+    "visual_properties": {
+      "background": "hsl(0, 0%, 100%)",
+      "border": "1px solid hsl(215, 20%, 88%)",
+      "border_radius": "8px",
+      "typography": "Inter, system-ui, -apple-system, sans-serif",
+      "elevation": "0 1px 2px 0 rgba(0, 0, 0, 0.05)"
+    },
+    "behavior": {
+      "on_mount": "Focus input if URL parameter autofocus=true is present",
+      "on_error": "Scroll to error message and announce via aria-live=\"assertive\"",
+      "validation": "Trim whitespace, check non-empty and length <= 255 characters"
+    },
+    "interaction": {
+      "events": [
+        "input",
+        "keydown (Enter submits)",
+        "blur",
+        "focus"
+      ],
+      "transitions": "all 250ms cubic-bezier(0.4, 0, 0.2, 1)"
+    },
+    "accessibility": {
+      "aria_role": "form",
+      "aria_label": "Create new task form",
+      "keyboard_navigation": "Tab accessible, Enter submits, Esc clears current input",
+      "focus_indicator": "2px solid hsl(215, 80%, 48%) with 2px offset"
+    },
+    "responsive_behavior": {
+      "mobile": "Full width stacked layout, button below input",
+      "desktop": "Inline horizontal flex layout with integrated submit button"
+    },
+    "tokens": {
+      "color": "color_system.surface",
+      "spacing": "spacing.scale.md",
+      "radius": "radius.md"
+    }
+  },
+  {
+    "id": "COMP-TASK-LIST",
+    "name": "Task Card Grid",
+    "category": "display",
+    "screen_id": "SCREEN-TASK-DASHBOARD",
+    "description": "Interactive list and card grid rendering active task slices",
+    "states": {
+      "initial": {
+        "description": "Renders cached task items in chronological order"
+      },
+      "loading": {
+        "description": "3 animated skeleton cards with pulse animation"
+      },
+      "success": {
+        "description": "Renders complete list of task cards with green status badges"
+      },
+      "empty": {
+        "description": "Empty state illustration with text: \"No tasks yet. Create one above.\""
+      },
+      "error": {
+        "description": "Error banner with \"Failed to load tasks\" and retry button"
+      },
+      "partial": {
+        "description": "Cached tasks rendered with top banner indicating sync in progress"
+      },
+      "offline": {
+        "description": "Read-only view of cached tasks with offline notice banner"
+      },
+      "destructive": {
+        "description": "Task deletion animates card fade-out and slide-up"
+      }
+    },
+    "dimensions": {
+      "width": "100%",
+      "min_height": "200px",
+      "padding": "16px",
+      "margin": "16px 0"
+    },
+    "visual_properties": {
+      "background": "hsl(220, 25%, 98%)",
+      "border": "none",
+      "border_radius": "8px",
+      "typography": "Inter, system-ui, -apple-system, sans-serif"
+    },
+    "behavior": {
+      "on_mount": "Fetch task entities and subscribe to background synchronization",
+      "on_error": "Render fallback cached items with retry CTA",
+      "validation": "Validate each task entity structure before rendering"
+    },
+    "interaction": {
+      "events": [
+        "click (card selection)",
+        "keydown (Arrow keys navigate cards)"
+      ],
+      "transitions": "transform 150ms"
+    },
+    "accessibility": {
+      "aria_role": "list",
+      "aria_label": "Decomposed task list",
+      "keyboard_navigation": "Arrow up/down to navigate tasks; Enter opens details",
+      "focus_indicator": "2px solid hsl(215, 80%, 48%) with 2px offset"
+    },
+    "responsive_behavior": {
+      "mobile": "Single column vertical stack of cards",
+      "desktop": "Responsive 2-column or 3-column grid layout"
+    },
+    "tokens": {
+      "color": "color_system.background",
+      "spacing": "spacing.scale.lg",
+      "radius": "radius.md"
+    }
+  },
+  {
+    "id": "COMP-STATUS-BADGE",
+    "name": "Task Status Pill",
+    "category": "feedback",
+    "screen_id": "SCREEN-TASK-DASHBOARD",
+    "description": "Visual indicator displaying lifecycle status (todo, in_progress, completed)",
+    "states": {
+      "initial": {
+        "description": "Gray neutral pill for \"todo\" state"
+      },
+      "loading": {
+        "description": "Pulsing blue pill indicating task execution active"
+      },
+      "success": {
+        "description": "Solid green pill indicating passing tests and verified evidence"
+      },
+      "empty": {
+        "description": "Muted outline pill"
+      },
+      "error": {
+        "description": "Red pill indicating quality gate failure or contract drift"
+      },
+      "partial": {
+        "description": "Amber pill indicating partially verified vertical slice"
+      },
+      "offline": {
+        "description": "Dashed border pill indicating offline status"
+      },
+      "destructive": {
+        "description": "Red outline pill with delete icon"
+      }
+    },
+    "dimensions": {
+      "min_height": "24px",
+      "padding": "2px 8px"
+    },
+    "visual_properties": {
+      "background": "hsl(0, 0%, 100%)",
+      "border": "1px solid hsl(215, 20%, 88%)",
+      "border_radius": "9999px",
+      "typography": "Inter, system-ui, -apple-system, sans-serif"
+    },
+    "behavior": {
+      "on_mount": "Render status color corresponding to entity.status",
+      "on_error": "Fallback to neutral status badge",
+      "validation": "Check status is one of canonical lifecycle statuses"
+    },
+    "interaction": {
+      "events": [
+        "hover (tooltip display)"
+      ],
+      "transitions": "color 150ms ease"
+    },
+    "accessibility": {
+      "aria_role": "status",
+      "aria_label": "Task lifecycle status",
+      "keyboard_navigation": "Non-interactive or focusable with tooltip description",
+      "focus_indicator": "none"
+    },
+    "responsive_behavior": {
+      "mobile": "Compact size (font-size xs)",
+      "desktop": "Standard size (font-size sm)"
+    },
+    "tokens": {
+      "color": "color_system.surface",
+      "spacing": "spacing.scale.xs",
+      "radius": "radius.full"
+    }
+  },
+  {
+    "id": "COMP-EVAL-CARD",
+    "name": "AI Evaluation Benchmark Card",
+    "category": "display",
+    "screen_id": "SCREEN-TASK-DETAILS",
+    "description": "Inspects AI tool decomposition benchmarks, accuracy score, and latency",
+    "states": {
+      "initial": {
+        "description": "Renders baseline benchmark scorecards"
+      },
+      "loading": {
+        "description": "Progress bar simulating live evaluation dataset execution"
+      },
+      "success": {
+        "description": "Pass badge with score > threshold (e.g. 95% pass rate)"
+      },
+      "empty": {
+        "description": "Notice: \"No evaluation runs recorded for this task\""
+      },
+      "error": {
+        "description": "Red scorecard with failing prompts highlighted"
+      },
+      "partial": {
+        "description": "Warning badge: \"Evaluation completed with warnings\""
+      },
+      "offline": {
+        "description": "Cached evaluation metrics with timestamp"
+      },
+      "destructive": {
+        "description": "Purge benchmark dataset confirmation dialog"
+      }
+    },
+    "dimensions": {
+      "width": "100%",
+      "min_height": "180px",
+      "padding": "16px"
+    },
+    "visual_properties": {
+      "background": "hsl(0, 0%, 100%)",
+      "border": "1px solid hsl(215, 20%, 88%)",
+      "border_radius": "12px",
+      "typography": "Inter, system-ui, -apple-system, sans-serif"
+    },
+    "behavior": {
+      "on_mount": "Load latest eval-runner JSON report for active feature",
+      "on_error": "Display fallback error details",
+      "validation": "Verify eval dataset schema integrity"
+    },
+    "interaction": {
+      "events": [
+        "click (expand test prompt breakdown)"
+      ],
+      "transitions": "height 250ms"
+    },
+    "accessibility": {
+      "aria_role": "region",
+      "aria_label": "AI benchmark results",
+      "keyboard_navigation": "Tab to inspect individual prompt details",
+      "focus_indicator": "2px solid hsl(215, 80%, 48%) with 2px offset"
+    },
+    "responsive_behavior": {
+      "mobile": "Stacked metric indicators",
+      "desktop": "Multi-column grid displaying Accuracy, P95 Latency, and Cost"
+    },
+    "tokens": {
+      "color": "color_system.surface",
+      "spacing": "spacing.scale.md",
+      "radius": "radius.lg"
+    }
+  },
+  {
+    "id": "COMP-DELETE-MODAL",
+    "name": "Destructive Confirmation Modal",
+    "category": "overlay",
+    "screen_id": "SCREEN-TASK-DETAILS",
+    "description": "Modal barrier preventing accidental task deletion or scope alteration",
+    "states": {
+      "initial": {
+        "description": "Hidden / closed state (display: none)"
+      },
+      "loading": {
+        "description": "Delete button disabled with spinner during HTTP DELETE"
+      },
+      "success": {
+        "description": "Modal closes, toast confirms deletion"
+      },
+      "empty": {
+        "description": "Standard confirmation prompt displayed"
+      },
+      "error": {
+        "description": "Error message within modal if delete request fails"
+      },
+      "partial": {
+        "description": "Disabled if user lacks deletion authority"
+      },
+      "offline": {
+        "description": "Blocked with notice: \"Cannot delete tasks in offline mode\""
+      },
+      "destructive": {
+        "description": "Prominent red \"Delete Permanently\" button with double confirmation"
+      }
+    },
+    "dimensions": {
+      "width": "450px",
+      "min_height": "220px",
+      "padding": "24px"
+    },
+    "visual_properties": {
+      "background": "hsl(0, 0%, 100%)",
+      "border": "1px solid hsl(0, 75%, 55%)",
+      "border_radius": "12px",
+      "typography": "Inter, system-ui, -apple-system, sans-serif",
+      "elevation": "0 10px 15px -3px rgba(0, 0, 0, 0.1)"
+    },
+    "behavior": {
+      "on_mount": "Trap focus within modal dialog",
+      "on_error": "Render error banner and keep modal open for retry",
+      "validation": "Require user to type task ID or click explicit confirm button"
+    },
+    "interaction": {
+      "events": [
+        "click (outside backdrop cancels)",
+        "keydown (Escape cancels)"
+      ],
+      "transitions": "opacity 150ms"
+    },
+    "accessibility": {
+      "aria_role": "alertdialog",
+      "aria_label": "Confirm task deletion",
+      "keyboard_navigation": "Focus trapped; Esc dismisses; Tab cycles Cancel and Delete buttons",
+      "focus_indicator": "2px solid hsl(215, 80%, 48%) with 2px offset"
+    },
+    "responsive_behavior": {
+      "mobile": "Full-screen bottom sheet modal",
+      "desktop": "Centered overlay dialog with darkened backdrop"
+    },
+    "tokens": {
+      "color": "color_system.surface",
+      "spacing": "spacing.scale.lg",
+      "radius": "radius.lg"
+    }
+  }
+]

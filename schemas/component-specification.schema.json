@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://engineering-os.dev/schemas/component-specification.schema.json",
+  "title": "Component Specification (Design-to-Code Contract)",
+  "description": "Machine-readable contract defining component visual properties, 8 interaction states, accessibility, dimensions, and behaviors",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "category",
+    "screen_id",
+    "states",
+    "dimensions",
+    "visual_properties",
+    "behavior",
+    "interaction",
+    "accessibility",
+    "responsive_behavior",
+    "tokens"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "category": {
+      "type": "string",
+      "enum": ["input", "display", "navigation", "feedback", "overlay", "layout"]
+    },
+    "screen_id": { "type": "string" },
+    "description": { "type": "string" },
+    "states": {
+      "type": "object",
+      "required": [
+        "initial",
+        "loading",
+        "success",
+        "empty",
+        "error",
+        "partial",
+        "offline",
+        "destructive"
+      ],
+      "properties": {
+        "initial": { "type": "object", "required": ["description"] },
+        "loading": { "type": "object", "required": ["description"] },
+        "success": { "type": "object", "required": ["description"] },
+        "empty": { "type": "object", "required": ["description"] },
+        "error": { "type": "object", "required": ["description"] },
+        "partial": { "type": "object", "required": ["description"] },
+        "offline": { "type": "object", "required": ["description"] },
+        "destructive": { "type": "object", "required": ["description"] }
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "required": ["min_height", "padding"],
+      "properties": {
+        "width": { "type": "string" },
+        "min_height": { "type": "string" },
+        "padding": { "type": "string" },
+        "margin": { "type": "string" }
+      }
+    },
+    "visual_properties": {
+      "type": "object",
+      "required": ["background", "border", "border_radius", "typography"],
+      "properties": {
+        "background": { "type": "string" },
+        "border": { "type": "string" },
+        "border_radius": { "type": "string" },
+        "typography": { "type": "string" },
+        "elevation": { "type": "string" }
+      }
+    },
+    "behavior": {
+      "type": "object",
+      "required": ["on_mount", "on_error", "validation"],
+      "properties": {
+        "on_mount": { "type": "string" },
+        "on_error": { "type": "string" },
+        "validation": { "type": "string" }
+      }
+    },
+    "interaction": {
+      "type": "object",
+      "required": ["events", "transitions"],
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "transitions": { "type": "string" }
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "required": ["aria_role", "aria_label", "keyboard_navigation", "focus_indicator"],
+      "properties": {
+        "aria_role": { "type": "string" },
+        "aria_label": { "type": "string" },
+        "keyboard_navigation": { "type": "string" },
+        "focus_indicator": { "type": "string" }
+      }
+    },
+    "responsive_behavior": {
+      "type": "object",
+      "required": ["mobile", "desktop"],
+      "properties": {
+        "mobile": { "type": "string" },
+        "tablet": { "type": "string" },
+        "desktop": { "type": "string" }
+      }
+    },
+    "tokens": {
+      "type": "object",
+      "required": ["color", "spacing", "radius"],
+      "properties": {
+        "color": { "type": "string" },
+        "spacing": { "type": "string" },
+        "radius": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": true
+}

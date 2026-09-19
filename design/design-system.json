@@ -1,0 +1,95 @@
+{
+  "name": "AgentSDLC Factory Design System",
+  "version": "1.0.0",
+  "visual_style": "standard",
+  "density": "comfortable",
+  "platforms": [
+    "Mobile"
+  ],
+  "color_system": {
+    "primary": "hsl(215, 80%, 48%)",
+    "primary_foreground": "hsl(0, 0%, 100%)",
+    "secondary": "hsl(215, 20%, 94%)",
+    "secondary_foreground": "hsl(215, 60%, 15%)",
+    "accent": "hsl(190, 90%, 42%)",
+    "background": "hsl(220, 25%, 98%)",
+    "surface": "hsl(0, 0%, 100%)",
+    "neutral": {
+      "border": "hsl(215, 20%, 88%)",
+      "text_primary": "hsl(220, 40%, 12%)",
+      "text_secondary": "hsl(215, 15%, 42%)",
+      "text_muted": "hsl(215, 10%, 60%)"
+    },
+    "status": {
+      "success": "hsl(145, 65%, 40%)",
+      "warning": "hsl(38, 92%, 50%)",
+      "error": "hsl(0, 75%, 55%)",
+      "info": "hsl(200, 85%, 50%)"
+    }
+  },
+  "typography": {
+    "font_family": {
+      "sans": "Inter, system-ui, -apple-system, sans-serif",
+      "mono": "JetBrains Mono, ui-monospace, monospace"
+    },
+    "font_sizes": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "md": "1rem",
+      "lg": "1.125rem",
+      "xl": "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem"
+    },
+    "font_weights": {
+      "regular": "400",
+      "medium": "500",
+      "semibold": "600",
+      "bold": "700"
+    }
+  },
+  "spacing": {
+    "unit_px": 8,
+    "scale": {
+      "xs": "4px",
+      "sm": "8px",
+      "md": "16px",
+      "lg": "24px",
+      "xl": "32px",
+      "2xl": "48px"
+    }
+  },
+  "radius": {
+    "sm": "4px",
+    "md": "8px",
+    "lg": "12px",
+    "full": "9999px"
+  },
+  "motion": {
+    "durations": {
+      "fast": "150ms",
+      "normal": "250ms",
+      "slow": "400ms"
+    },
+    "easings": {
+      "default": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "ease_in_out": "cubic-bezier(0.4, 0, 0.2, 1)"
+    }
+  },
+  "elevation": {
+    "sm": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+    "md": "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+    "lg": "0 10px 15px -3px rgba(0, 0, 0, 0.1)"
+  },
+  "responsive_breakpoints": {
+    "sm": "640px",
+    "md": "768px",
+    "lg": "1024px",
+    "xl": "1280px"
+  },
+  "accessibility": {
+    "wcag_level": "AA",
+    "min_contrast_ratio": 4.5,
+    "focus_indicator": "2px solid hsl(215, 80%, 48%) with 2px offset"
+  }
+}
