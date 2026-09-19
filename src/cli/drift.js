@@ -1,9 +1,10 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { findProjectRoot, resolveActiveFeature } from '../core/config.js';
 
-export async function runDrift(args) {
-  const featureId = args[0] || '001-feature';
-  const projectRoot = process.cwd();
+export async function runDrift(args = []) {
+  const projectRoot = await findProjectRoot();
+  const featureId = await resolveActiveFeature(projectRoot, args[0]);
   const featureDir = path.join(projectRoot, 'specs', featureId);
 
   console.log(`\x1b[33m🔍 [CONVERGENCE & DRIFT DETECTOR]\x1b[0m Checking: \x1b[1m${featureId}\x1b[0m\n`);
@@ -64,7 +65,9 @@ export async function runDrift(args) {
     console.log(`\n\x1b[32m✓ ZERO DRIFT DETECTED:\x1b[0m Specification, Tasks, and Implementation are fully converged!`);
   } else if (uniqueReqs.length === 0) {
     console.log(`\n\x1b[33mℹ Incomplete specification data for ${featureId}. Run 'eos stage specify ${featureId}'\x1b[0m`);
+    process.exitCode = 1;
   } else {
     console.log(`\n\x1b[33m⚠️ Drift detected between specification and execution artifacts.\x1b[0m`);
+    process.exitCode = 1;
   }
 }

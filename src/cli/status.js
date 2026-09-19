@@ -1,24 +1,36 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { findProjectRoot } from '../core/config.js';
+import { STAGES } from '../lifecycle/stages.js';
+import { GATE_REGISTRY } from '../gates/registry.js';
 
 export async function runStatus(args) {
-  const projectRoot = process.cwd();
+  const projectRoot = await findProjectRoot();
   const specsDir = path.join(projectRoot, 'specs');
 
   console.log(`\n\x1b[1m\x1b[36m╔════════════════════════════════════════════════════════════════════════════╗\x1b[0m`);
-  console.log(`\x1b[1m\x1b[36m║                  AGENTIC AI SDLC OS — DASHBOARD & STATUS                   ║\x1b[0m`);
+  console.log(`\x1b[1m\x1b[36m║             AGENTIC AI SDLC OS — SOFTWARE FACTORY DASHBOARD                ║\x1b[0m`);
   console.log(`\x1b[1m\x1b[36m╚════════════════════════════════════════════════════════════════════════════╝\x1b[0m\n`);
 
-  // Check constitution
+  // Check constitution & lifecycle
   let hasConstitution = false;
+  let hasLifecycle = false;
   try {
     await fs.access(path.join(projectRoot, '.ai', 'constitution.md'));
     hasConstitution = true;
   } catch {}
+  try {
+    await fs.access(path.join(projectRoot, '.ai', 'lifecycle.md'));
+    hasLifecycle = true;
+  } catch {}
 
-  console.log(`\x1b[1mSystem Law & Governance:\x1b[0m`);
+  const implementedGates = Object.values(GATE_REGISTRY).filter(g => g.implementationStatus === 'IMPLEMENTED').length;
+  const totalGates = Object.keys(GATE_REGISTRY).length;
+
+  console.log(`\x1b[1mSystem Governance & Kernel:\x1b[0m`);
   console.log(`  Constitution: ${hasConstitution ? '\x1b[32mActive (.ai/constitution.md)\x1b[0m' : '\x1b[31mMissing\x1b[0m'}`);
-  console.log(`  Quality Gates Policy: \x1b[32mActive (.ai/quality-gates.md)\x1b[0m`);
+  console.log(`  Lifecycle Registry: ${hasLifecycle ? `\x1b[32mActive (${STAGES.length} Canonical Stages)\x1b[0m` : '\x1b[31mMissing\x1b[0m'}`);
+  console.log(`  Quality Gates: \x1b[32m${implementedGates}/${totalGates} Gates Implemented\x1b[0m (Zero Vacuous Passes Enforced)`);
   console.log(`  Agent Permissions: \x1b[32mLeast-Privilege Enforced (.ai/tool-policy.md)\x1b[0m\n`);
 
   console.log(`\x1b[1mActive Features & Specifications:\x1b[0m`);
@@ -58,5 +70,5 @@ export async function runStatus(args) {
     console.log(`  \x1b[31mUnable to read specs directory: ${err.message}\x1b[0m`);
   }
 
-  console.log('\n\x1b[90mRun "eos stage <stage> <feature>" to advance a feature through the pipeline.\x1b[0m\n');
+  console.log('\n\x1b[90mRun "eos stage <stage> [feature]" to advance a feature through the pipeline.\x1b[0m\n');
 }

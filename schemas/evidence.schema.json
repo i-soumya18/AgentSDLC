@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentSDLC Verification Evidence Schema",
+  "description": "Schema for machine-verifiable evidence produced during verification or task completion",
+  "type": "object",
+  "required": [
+    "evidence_id",
+    "gate_id",
+    "target_artifact",
+    "timestamp",
+    "evaluator",
+    "status",
+    "summary",
+    "command_executed"
+  ],
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^EVID-[A-Z0-9_-]+$",
+      "description": "Unique identifier for this verification evidence record"
+    },
+    "gate_id": {
+      "type": "string",
+      "description": "Name of the quality gate evaluated (e.g. spec, contract, code, test, security, ai)"
+    },
+    "target_artifact": {
+      "type": "string",
+      "description": "Feature ID or artifact path evaluated (e.g. 001-ai-task-copilot, contracts/openapi.yaml)"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "evaluator": {
+      "type": "string",
+      "description": "Agent or harness executing the check (e.g. Test Agent, eval-runner.js, linter)"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pass", "fail", "blocked", "unimplemented"]
+    },
+    "summary": {
+      "type": "string",
+      "description": "High level outcome explanation"
+    },
+    "command_executed": {
+      "type": "string",
+      "description": "Exact terminal command used to produce this evidence"
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "tests_total": { "type": "integer" },
+        "tests_passed": { "type": "integer" },
+        "tests_failed": { "type": "integer" },
+        "duration_ms": { "type": "number" },
+        "pass_rate": { "type": "number" }
+      }
+    },
+    "raw_logs": {
+      "type": "string",
+      "description": "Snippets or digest of terminal logs proving evaluation"
+    }
+  },
+  "additionalProperties": false
+}

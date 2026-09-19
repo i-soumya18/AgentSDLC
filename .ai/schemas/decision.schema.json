@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentSDLC Decision Schema",
+  "description": "Schema for persistent Architecture and Product Decision Records (ADRs/Decisions)",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "status",
+    "date",
+    "deciders",
+    "context",
+    "decision",
+    "alternatives_considered",
+    "consequences"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(DEC|ADR)-[0-9]{4}$",
+      "description": "Unique decision identifier (e.g. ADR-0001, DEC-0042)"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200
+    },
+    "status": {
+      "type": "string",
+      "enum": ["proposed", "accepted", "rejected", "deprecated", "superseded"]
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "deciders": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "context": {
+      "type": "string",
+      "minLength": 10
+    },
+    "decision": {
+      "type": "string",
+      "minLength": 10
+    },
+    "alternatives_considered": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["option", "rejection_rationale"],
+        "properties": {
+          "option": { "type": "string" },
+          "rejection_rationale": { "type": "string" }
+        }
+      }
+    },
+    "consequences": {
+      "type": "object",
+      "required": ["positive", "negative"],
+      "properties": {
+        "positive": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "negative": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "neutral": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "superseded_by": {
+      "type": ["string", "null"]
+    },
+    "affected_components": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentSDLC Quality Gate Schema",
+  "description": "Schema defining a quality gate in the canonical gate registry",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "purpose",
+    "implementation_status",
+    "required_evidence",
+    "evaluator_role"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z_]+$",
+      "description": "Short programmatic identifier for the gate (e.g. product, spec, contract, code, test)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human readable name of the gate (e.g. Product Gate, Spec Gate)"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "Architectural purpose of this gate"
+    },
+    "implementation_status": {
+      "type": "string",
+      "enum": ["IMPLEMENTED", "EXPLICITLY_UNIMPLEMENTED"],
+      "description": "Whether the gate evaluator is actively implemented or explicitly unimplemented"
+    },
+    "required_evidence": {
+      "type": "string",
+      "description": "Description of mandatory evidence needed to pass"
+    },
+    "evaluator_role": {
+      "type": "string",
+      "description": "Agent or automated tool authorized to evaluate this gate"
+    },
+    "blocking": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether failure blocks release or transition"
+    }
+  },
+  "additionalProperties": false
+}

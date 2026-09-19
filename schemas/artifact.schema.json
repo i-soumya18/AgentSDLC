@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentSDLC Artifact Metadata",
+  "description": "Universal canonical metadata schema for all AgentSDLC engineering artifacts",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "version",
+    "status",
+    "created_at",
+    "updated_at",
+    "author"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9_-]+$",
+      "description": "Unique immutable identifier for the artifact (e.g. SPEC-001, ADR-0001, TASK-001.1)"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "charter",
+        "spec",
+        "clarification",
+        "ux",
+        "architecture",
+        "adr",
+        "contract",
+        "plan",
+        "task",
+        "test",
+        "evidence",
+        "eval",
+        "release",
+        "review",
+        "incident",
+        "product_contract",
+        "decision",
+        "assumption"
+      ],
+      "description": "Canonical artifact type classification"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
+      "description": "Semantic version of the artifact"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "proposed", "in_review", "approved", "completed", "superseded", "rejected", "deprecated"],
+      "description": "Lifecycle state of the artifact"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 last modified timestamp"
+    },
+    "author": {
+      "type": "string",
+      "description": "Agent role or human username who created the artifact"
+    },
+    "parent": {
+      "type": ["string", "null"],
+      "description": "ID of parent artifact in traceability chain (e.g. SPEC-001 for TASK-001.1)"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "IDs of artifacts this artifact depends on"
+    },
+    "source": {
+      "type": ["string", "null"],
+      "description": "Relative file path of the source artifact document"
+    },
+    "evidence": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Pointers to machine-verifiable verification evidence IDs or logs"
+    }
+  },
+  "additionalProperties": false
+}

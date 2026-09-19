@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentSDLC Assumption Schema",
+  "description": "Schema for persistent entries in the Factory Assumption Ledger",
+  "type": "object",
+  "required": [
+    "id",
+    "assumption",
+    "evidence_basis",
+    "confidence",
+    "impact_if_invalid",
+    "validation_status",
+    "created_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^ASSUMPTION-[0-9]{3,}$",
+      "description": "Unique assumption identifier (e.g. ASSUMPTION-001)"
+    },
+    "assumption": {
+      "type": "string",
+      "minLength": 5,
+      "description": "Explicit statement of the unproven belief or assumption"
+    },
+    "evidence_basis": {
+      "type": "string",
+      "description": "Context or statement prompting this assumption"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Confidence score from 0.0 to 1.0"
+    },
+    "impact_if_invalid": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"],
+      "description": "Blast radius if this assumption is disproven"
+    },
+    "validation_status": {
+      "type": "string",
+      "enum": ["pending", "validated", "refuted"],
+      "description": "Current status of assumption verification"
+    },
+    "validated_by": {
+      "type": ["string", "null"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

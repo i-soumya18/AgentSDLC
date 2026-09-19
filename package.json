@@ -15,7 +15,8 @@
     "test:eval": "node src/eval/eval-runner.js --dataset tests/evals/tool-use.jsonl --threshold 0.8",
     "drift": "node bin/engineering-os.js drift",
     "status": "node bin/engineering-os.js status",
-    "verify": "bash scripts/verify.sh",
+    "verify": "node bin/engineering-os.js verify",
+    "verify:sh": "bash scripts/verify.sh",
     "lint": "node -e \"console.log('✓ Lint passed: Zero syntax errors')\""
   },
   "keywords": [

@@ -7,6 +7,7 @@ import { runDrift } from '../src/cli/drift.js';
 import { runStatus } from '../src/cli/status.js';
 import { runEval } from '../src/eval/eval-runner.js';
 import { runVerify } from '../src/cli/verify.js';
+import { STAGES } from '../src/lifecycle/stages.js';
 
 const HELP_TEXT = `
 \x1b[1m\x1b[36mAgentic AI SDLC OS (engineering-os / eos)\x1b[0m
@@ -18,7 +19,7 @@ const HELP_TEXT = `
 
 \x1b[1mCOMMANDS:\x1b[0m
   \x1b[32minit <project-dir>\x1b[0m           Bootstrap a complete project skeleton with full SDLC OS
-  \x1b[32mstage <stage-name> [feature]\x1b[0m Transition/scaffold one of 15 SDLC stages
+  \x1b[32mstage <stage-name> [feature]\x1b[0m Transition/scaffold one of 17 SDLC stages
   \x1b[32mgate <gate-name> [feature]\x1b[0m   Evaluate machine-verifiable gate evidence
   \x1b[32mstatus\x1b[0m                       Display visual SDLC pipeline dashboard
   \x1b[32mdrift [feature]\x1b[0m              Detect spec, contract, task, and code drift
