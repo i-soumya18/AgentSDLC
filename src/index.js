@@ -22,11 +22,25 @@ export {
   validateEvidence
 } from './artifacts/validator.js';
 
+// Product Discovery Engine (Phase 1)
+export {
+  ingestIdea,
+  analyzeIdeaText,
+  computeAdaptiveQuestions,
+  updateCompletenessScore,
+  applyClarification,
+  exportMarkdownArtifacts,
+  loadDiscoveryState
+} from './discovery/discovery-engine.js';
+
 // Verification & Eval Harness
 export { executeVerification } from './verification/verify-runner.js';
 export { runEval } from './eval/eval-runner.js';
 
 // CLI Commands
+export { runIdea } from './cli/idea.js';
+export { runDiscover } from './cli/discover.js';
+export { runClarify } from './cli/clarify.js';
 export { runInit } from './cli/init.js';
 export { runStage } from './cli/stage.js';
 export { runGate } from './cli/gate.js';

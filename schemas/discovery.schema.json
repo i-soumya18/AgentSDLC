@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentSDLC Product Discovery State Schema",
+  "description": "Schema for the structured discovery state in product/discovery.json",
+  "type": "object",
+  "required": [
+    "raw_idea",
+    "status",
+    "completeness_score",
+    "intent",
+    "users",
+    "problems",
+    "desired_outcomes",
+    "features",
+    "constraints",
+    "preferences",
+    "assumptions",
+    "unknowns",
+    "decisions",
+    "risks",
+    "contradictions",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "raw_idea": {
+      "type": "string",
+      "description": "Original unedited user idea text"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["IN_PROGRESS", "DISCOVERY_COMPLETE"],
+      "description": "Current status of product discovery"
+    },
+    "completeness_score": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Requirement and intent completeness ratio from 0.0 to 1.0"
+    },
+    "intent": {
+      "type": "object",
+      "required": ["primary_goal", "problem_statement"],
+      "properties": {
+        "primary_goal": { "type": "string" },
+        "problem_statement": { "type": "string" },
+        "domain": { "type": "string" }
+      }
+    },
+    "users": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["persona", "confirmed"],
+        "properties": {
+          "persona": { "type": "string" },
+          "needs": { "type": "string" },
+          "confirmed": { "type": "boolean" }
+        }
+      }
+    },
+    "problems": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "desired_outcomes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "confirmed"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "priority": { "type": "string", "enum": ["must", "should", "could"] },
+          "confirmed": { "type": "boolean" }
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "description", "confirmed"],
+        "properties": {
+          "type": { "type": "string" },
+          "description": { "type": "string" },
+          "confirmed": { "type": "boolean" }
+        }
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "properties": {
+        "platform": { "type": "array", "items": { "type": "string" } },
+        "tech_stack": { "type": "array", "items": { "type": "string" } },
+        "ui_style": { "type": "string" }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "assumption", "confidence", "validation_status"],
+        "properties": {
+          "id": { "type": "string" },
+          "assumption": { "type": "string" },
+          "evidence_basis": { "type": "string" },
+          "confidence": { "type": "number" },
+          "impact_if_invalid": { "type": "string" },
+          "validation_status": { "type": "string", "enum": ["pending", "validated", "refuted"] }
+        }
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "question", "impact", "resolved"],
+        "properties": {
+          "id": { "type": "string" },
+          "question": { "type": "string" },
+          "category": { "type": "string" },
+          "impact": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+          "resolved": { "type": "boolean" },
+          "answer": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["risk", "severity"],
+        "properties": {
+          "risk": { "type": "string" },
+          "severity": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+          "mitigation": { "type": "string" }
+        }
+      }
+    },
+    "contradictions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "conflict", "resolved"],
+        "properties": {
+          "id": { "type": "string" },
+          "conflict": { "type": "string" },
+          "items": { "type": "array", "items": { "type": "string" } },
+          "resolved": { "type": "boolean" }
+        }
+      }
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

@@ -7,6 +7,9 @@ import { runDrift } from '../src/cli/drift.js';
 import { runStatus } from '../src/cli/status.js';
 import { runEval } from '../src/eval/eval-runner.js';
 import { runVerify } from '../src/cli/verify.js';
+import { runIdea } from '../src/cli/idea.js';
+import { runDiscover } from '../src/cli/discover.js';
+import { runClarify } from '../src/cli/clarify.js';
 import { STAGES } from '../src/lifecycle/stages.js';
 
 const HELP_TEXT = `
@@ -17,14 +20,19 @@ const HELP_TEXT = `
   eos <command> [options]
   engineering-os <command> [options]
 
-\x1b[1mCOMMANDS:\x1b[0m
-  \x1b[32minit <project-dir>\x1b[0m           Bootstrap a complete project skeleton with full SDLC OS
-  \x1b[32mstage <stage-name> [feature]\x1b[0m Transition/scaffold one of 17 SDLC stages
-  \x1b[32mgate <gate-name> [feature]\x1b[0m   Evaluate machine-verifiable gate evidence
-  \x1b[32mstatus\x1b[0m                       Display visual SDLC pipeline dashboard
-  \x1b[32mdrift [feature]\x1b[0m              Detect spec, contract, task, and code drift
-  \x1b[32meval [options]\x1b[0m               Execute AI evaluation harness against test datasets
-  \x1b[32mverify\x1b[0m                       Run full repository verification across all gates
+\x1b[1mSOFTWARE FACTORY COMMANDS:\x1b[0m
+  \x1b[32midea "<description>"\x1b[0m          Ingest raw idea and bootstrap adaptive product discovery
+  \x1b[32mdiscover\x1b[0m                      View current discovery state, completeness, and pending questions
+  \x1b[32mclarify "<answers>"\x1b[0m           Provide clarification answers, resolve unknowns and assumptions
+
+\x1b[1mSDLC GOVERNANCE COMMANDS:\x1b[0m
+  \x1b[32minit <project-dir>\x1b[0m            Bootstrap a complete project skeleton with full SDLC OS
+  \x1b[32mstage <stage-name> [feature]\x1b[0m  Transition/scaffold one of 17 SDLC stages
+  \x1b[32mgate <gate-name> [feature]\x1b[0m    Evaluate machine-verifiable gate evidence
+  \x1b[32mstatus\x1b[0m                        Display visual SDLC pipeline dashboard
+  \x1b[32mdrift [feature]\x1b[0m               Detect spec, contract, task, and code drift
+  \x1b[32meval [options]\x1b[0m                Execute AI evaluation harness against test datasets
+  \x1b[32mverify\x1b[0m                        Run full repository verification across all gates
 
 \x1b[1mSDLC STAGES:\x1b[0m
   assess -> constitution -> specify -> clarify -> design -> architect ->
@@ -40,11 +48,11 @@ const HELP_TEXT = `
   --json           Output result in JSON format
 
 \x1b[1mEXAMPLES:\x1b[0m
-  eos init my-awesome-app --template fullstack --preset strict
+  eos idea "Pharmacy POS for inventory and billing"
+  eos discover
+  eos clarify "Single store, offline billing needed, for pharmacists"
   eos stage specify 001-user-auth
-  eos gate contract 001-user-auth
-  eos eval --dataset tests/evals/tool-use.jsonl
-  eos drift 001-user-auth
+  eos gate all
   eos verify
 `;
 
@@ -65,6 +73,15 @@ async function main() {
 
   try {
     switch (command) {
+      case 'idea':
+        await runIdea(commandArgs);
+        break;
+      case 'discover':
+        await runDiscover(commandArgs);
+        break;
+      case 'clarify':
+        await runClarify(commandArgs);
+        break;
       case 'init':
         await runInit(commandArgs);
         break;
